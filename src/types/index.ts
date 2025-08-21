@@ -4,12 +4,12 @@ interface UserInfo {
   role: string;
 }
 
-interface CommentInfo {
+export interface CommentInfo {
   id: string;
   content: string;
 }
 
-interface MarkInfo {
+export interface MarkInfo {
   id: string;
   type: 'like' | 'dislike';
   user: UserInfo;
