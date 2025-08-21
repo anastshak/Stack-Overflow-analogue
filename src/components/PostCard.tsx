@@ -3,11 +3,18 @@ import { CodeOutlined, CommentOutlined, DislikeOutlined, LikeOutlined, UserOutli
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { duotoneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { SnippetModel } from '../types';
+import cn from 'classnames';
 
-export const PostCard = ({ snippet }: { snippet: SnippetModel }) => {
+interface PostCardProps {
+  snippet: SnippetModel;
+  className?: string;
+  onClick?: () => void;
+}
+
+export const PostCard = ({ snippet, className, onClick }: PostCardProps) => {
   return (
     <div className="mb-4">
-      <Card className="shadow-md rounded-lg">
+      <Card className={cn('shadow-md rounded-lg', className)} onClick={onClick}>
         <div className="flex justify-between items-center mb-2 text-gray-500">
           <span className="font-medium">
             <UserOutlined /> {snippet.creator}

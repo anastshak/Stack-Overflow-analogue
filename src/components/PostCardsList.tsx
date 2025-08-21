@@ -4,10 +4,13 @@ import { getPosts } from '../api/posts';
 import { Alert, Empty, List, Spin } from 'antd';
 import { SnippetModel } from '../types';
 import { useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const PostCardList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = parseInt(searchParams.get('page') || '1', 10);
+
+  const navigate = useNavigate();
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['snippets', page],
@@ -48,7 +51,14 @@ export const PostCardList = () => {
         onChange: (p) => setSearchParams({ page: p.toString() }),
       }}
       dataSource={data?.snippets || []}
-      renderItem={(snippet: SnippetModel) => <PostCard key={snippet.id} snippet={snippet} />}
+      renderItem={(snippet: SnippetModel) => (
+        <PostCard
+          key={snippet.id}
+          snippet={snippet}
+          className="hover:cursor-pointer"
+          onClick={() => navigate(`/posts/${snippet.id}`)}
+        />
+      )}
     />
   );
 };
