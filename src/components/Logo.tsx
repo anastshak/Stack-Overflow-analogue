@@ -1,7 +1,11 @@
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 
-export const Logo = () => {
+interface LogoProps {
+  isDisplay?: boolean;
+}
+
+export const Logo = ({ isDisplay }: LogoProps) => {
   const navigate = useNavigate();
   return (
     <div className="flex items-center gap-2 hover:cursor-pointer" onClick={() => navigate('/')}>
@@ -10,7 +14,7 @@ export const Logo = () => {
         <span className="text-2xl">/</span>
         <RightOutlined />
       </div>
-      <h1 className="text-base font-bold font-mono">codelang</h1>
+      {isDisplay && <h1 className="text-base font-bold font-mono">codelang</h1>}
     </div>
   );
 };
