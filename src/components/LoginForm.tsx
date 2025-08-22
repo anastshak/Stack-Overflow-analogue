@@ -67,7 +67,7 @@ export const LoginForm = () => {
 
         <div className="text-center mt-4">
           Don't have an account?{' '}
-          <Link to="/register" className="text-blue-600">
+          <Link to="/signup" className="text-blue-600">
             Sign up
           </Link>
         </div>
