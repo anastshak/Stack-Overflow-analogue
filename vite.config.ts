@@ -6,6 +6,13 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
-    open: true
+    open: true,
+    proxy: {
+      '/api': {
+        target: 'https://codelang.vercel.app',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
   },
 })
