@@ -5,6 +5,7 @@ import { Button, Card, Form, Input, message } from 'antd';
 import { loginSchema, LoginFormData } from '../utils/validationLoginSchema';
 import { loginUser } from '../api/auth';
 import axios from 'axios';
+import { useAuthStore } from '../store/authStore';
 
 export const LoginForm = () => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ export const LoginForm = () => {
   const onSubmit = async (values: LoginFormData) => {
     try {
       const data = await loginUser(values.username, values.password);
-      localStorage.setItem('user', JSON.stringify(data));
+      useAuthStore.getState().login(data);
 
       message.success(`Welcome, ${data.username}`);
       navigate('/');
