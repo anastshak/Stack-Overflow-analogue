@@ -7,5 +7,17 @@ export const registerUser = async (username: string, password: string): Promise<
     username,
     password,
   });
-  return response.data;
+  const { data: userData } = response.data;
+
+  return userData;
+};
+
+export const loginUser = async (username: string, password: string): Promise<UserInfo> => {
+  const response = await axios.post(`${BASE_URL}/auth/login`, {
+    username,
+    password,
+  });
+  const { data: userData } = response.data;
+
+  return userData;
 };
