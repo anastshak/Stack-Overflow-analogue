@@ -1,12 +1,11 @@
 import axios from 'axios';
-import { BASE_URL } from '../constants';
 import { ApiResponse, ApiSnippet, SnippetModel } from '../types';
 
 export const getPosts = async (
   page: number,
   limit: number = 5,
 ): Promise<{ snippets: SnippetModel[]; meta: ApiResponse['meta'] }> => {
-  const response = await axios.get(`${BASE_URL}/snippets`, { params: { page, limit } });
+  const response = await axios.get(`/api/snippets`, { params: { page, limit } });
   const serverData = response.data.data;
 
   const snippets: SnippetModel[] = serverData.data.map((elem: ApiSnippet) => ({

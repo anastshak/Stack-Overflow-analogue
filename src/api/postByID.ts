@@ -1,9 +1,8 @@
 import axios from 'axios';
-import { BASE_URL } from '../constants';
 import { CommentInfo, MarkInfo, SnippetModel } from '../types';
 
 export const getPostById = async (id: string): Promise<{ snippet: SnippetModel; comments: CommentInfo[] }> => {
-  const response = await axios.get(`${BASE_URL}/snippets/${id}`);
+  const response = await axios.get(`/api/snippets/${id}`);
   const { data: snippetData } = response.data;
 
   const snippet: SnippetModel = {
