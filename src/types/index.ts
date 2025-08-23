@@ -7,6 +7,7 @@ export interface UserInfo {
 export interface CommentInfo {
   id: string;
   content: string;
+  user: UserInfo;
 }
 
 export interface MarkInfo {
