@@ -48,4 +48,5 @@ export interface SnippetModel {
   likes: number;
   dislikes: number;
   commentsCount: number;
+  userMark?: 'like' | 'dislike';
 }
