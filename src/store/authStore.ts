@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { UserInfo } from '../types';
+import { queryClient } from '../utils/queryClient';
 
 interface AuthState {
   user: UserInfo | null;
@@ -21,6 +22,8 @@ export const useAuthStore = create<AuthState>((set) => ({
   logout: () => {
     localStorage.removeItem('user');
     set({ user: null, isAuthenticated: false });
+    queryClient.invalidateQueries({ queryKey: ['snippets'] });
+    queryClient.invalidateQueries({ queryKey: ['post'] });
   },
 
   restore: () => {
