@@ -5,7 +5,6 @@ import { Button, Card, Form, Input, message } from 'antd';
 import { registerSchema, RegisterFormData } from '../utils/validationRegisterSchema';
 import { registerUser } from '../api/auth';
 import axios from 'axios';
-import { useAuthStore } from '../store/authStore';
 
 export const RegisterForm = () => {
   const navigate = useNavigate();
@@ -25,9 +24,7 @@ export const RegisterForm = () => {
 
   const onSubmit = async (values: RegisterFormData) => {
     try {
-      const data = await registerUser(values.username, values.password);
-      useAuthStore.getState().login(data);
-
+      await registerUser(values.username, values.password);
       message.success('Registration is successful! Log in to the system');
       navigate('/login');
     } catch (err) {
