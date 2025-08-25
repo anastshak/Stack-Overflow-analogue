@@ -1,11 +1,23 @@
 import { Menu } from 'antd';
 import { HomeOutlined, UserOutlined, FileTextOutlined, QuestionCircleOutlined, TeamOutlined } from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
 
 export const Sidebar = () => {
-  const navigate = useNavigate();
   const { isAuthenticated, user } = useAuthStore();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const selectedKey = (() => {
+    if (location.pathname === '/') return 'home';
+    if (location.pathname === '/users') return 'users';
+    // if (location.pathname.startsWith('/snippets')) return 'snippets';
+    // if (location.pathname.startsWith('/account')) return 'account';
+    // if (location.pathname.startsWith('/post')) return 'post';
+    // if (location.pathname.startsWith('/questions')) return 'questions';
+    return '';
+  })();
 
   return (
     <aside className="w-64 bg-blue-700 text-white">
@@ -31,6 +43,7 @@ export const Sidebar = () => {
         mode="inline"
         theme="dark"
         defaultSelectedKeys={['home']}
+        selectedKeys={[selectedKey]}
         items={[
           { key: 'home', icon: <HomeOutlined />, label: 'Home', onClick: () => navigate('/') },
           { key: 'account', icon: <UserOutlined />, label: 'My Account', disabled: !isAuthenticated },
