@@ -5,10 +5,27 @@ import { useAuthStore } from '../store/authStore';
 
 export const Sidebar = () => {
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuthStore();
+  const { isAuthenticated, user } = useAuthStore();
 
   return (
     <aside className="w-64 bg-blue-700 text-white">
+      {isAuthenticated && (
+        <div className="px-5 py-4 bg-blue-800 border-b border-blue-600">
+          <div className="flex items-center gap-3">
+            <div
+              className="w-9 h-9 bg-blue-700 rounded-full flex items-center justify-center 
+                    border-2 border-blue-500 shadow-sm"
+            >
+              <UserOutlined className="text-base" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <h3 className="text-white font-medium text-sm truncate">{user?.username}</h3>
+              <p className="text-blue-300 text-xs">{user?.role}</p>
+            </div>
+          </div>
+        </div>
+      )}
+
       <Menu
         className="h-full bg-blue-700 custom-menu"
         mode="inline"
@@ -20,7 +37,7 @@ export const Sidebar = () => {
           { key: 'post', icon: <FileTextOutlined />, label: 'Post Snippet', disabled: !isAuthenticated },
           { key: 'snippets', icon: <FileTextOutlined />, label: 'My Snippets', disabled: !isAuthenticated },
           { key: 'questions', icon: <QuestionCircleOutlined />, label: 'Questions' },
-          { key: 'users', icon: <TeamOutlined />, label: 'Users' },
+          { key: 'users', icon: <TeamOutlined />, label: 'Users', onClick: () => navigate('/users') },
         ]}
       />
     </aside>
