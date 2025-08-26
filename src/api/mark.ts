@@ -1,11 +1,11 @@
 import axios from 'axios';
-import { MarkInfo } from '../types';
+import { MarkInfo } from '../types/snippet';
 
 export const markPost = async (id: string, mark: MarkInfo['type']) => {
   const response = await axios.post(`/api/snippets/${id}/mark`, {
     mark,
   });
-  const { data: userData } = response.data;
+  const markData = response.data.data;
 
-  return userData;
+  return markData;
 };

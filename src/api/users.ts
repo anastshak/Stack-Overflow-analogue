@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { ApiUsersResponse, User } from '../types';
+import { ApiUsersResponse } from '../types/api';
+import { UserWithStatistic } from '../types/user';
 
 export const getUsers = async (
   page: number,
@@ -12,7 +13,7 @@ export const getUsers = async (
   return { users: serverData.data, meta: serverData.meta };
 };
 
-export const getUserStatistic = async (id: string): Promise<User> => {
+export const getUserStatistic = async (id: string): Promise<UserWithStatistic> => {
   const response = await axios.get(`/api/users/${id}/statistic`);
   const userData = response.data.data;
 
