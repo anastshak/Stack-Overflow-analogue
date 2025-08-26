@@ -14,6 +14,7 @@ import {
 import { useParams } from 'react-router-dom';
 import { getUserStatistic } from '../api/users';
 import { useQuery } from '@tanstack/react-query';
+import { formatNumber } from '../utils/formatNumber';
 
 export const UserCardDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -70,7 +71,7 @@ export const UserCardDetails = () => {
             <Tooltip title="Community Rating">
               <div className="flex items-center text-gray-700 font-semibold space-x-1 bg-yellow-200 px-4 py-2 rounded-full shadow-sm">
                 <StarOutlined />
-                <span>{data.statistic.rating}</span>
+                <span>{formatNumber(data.statistic.rating)}</span>
                 <span>Rating</span>
               </div>
             </Tooltip>
