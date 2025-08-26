@@ -12,7 +12,7 @@
   }
 
   body {
-    @apply relative min-h-screen font-sans bg-white text-black;
+    @apply relative min-h-screen font-sans bg-gray-50 text-black;
   }
 }
 
