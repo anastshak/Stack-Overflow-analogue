@@ -39,6 +39,38 @@ export interface ApiResponse {
     totalPages: number;
   };
 }
+export interface ApiUsersResponse {
+  data: User[];
+  links: {
+    current: string;
+    next?: string;
+    last: string;
+  };
+  meta: {
+    currentPage: number;
+    itemsPerPage: number;
+    totalItems: number;
+    totalPages: number;
+  };
+}
+
+export interface UserStatistic {
+  snippetsCount: number;
+  rating: number;
+  commentsCount: number;
+  likesCount: number;
+  dislikesCount: number;
+  questionsCount: number;
+  correctAnswersCount: number;
+  regularAnswersCount: number;
+}
+
+export interface User {
+  id: string;
+  username: string;
+  role: string;
+  statistic: UserStatistic;
+}
 
 // necessary type
 export interface SnippetModel {
