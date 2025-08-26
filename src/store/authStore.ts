@@ -6,7 +6,7 @@ interface AuthState {
   user: UserInfo | null;
   isAuthenticated: boolean;
   login: (user: UserInfo) => void;
-  logout: () => void;
+  clear: () => void;
   restore: () => void;
 }
 
@@ -19,7 +19,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     set({ user, isAuthenticated: true });
   },
 
-  logout: () => {
+  clear: () => {
     localStorage.removeItem('user');
     set({ user: null, isAuthenticated: false });
     queryClient.invalidateQueries({ queryKey: ['snippets'] });

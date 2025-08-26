@@ -12,3 +12,7 @@ export const loginUser = async (username: string, password: string): Promise<Use
   const userData = response.data.data;
   return userData;
 };
+
+export const logoutUser = async (): Promise<void> => {
+  await axios.post('/api/auth/logout');
+};
