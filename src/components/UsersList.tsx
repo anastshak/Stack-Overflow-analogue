@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { Spin, Empty, Pagination, Alert, List } from 'antd';
 import { useSearchParams } from 'react-router-dom';
-import { UserCard } from '../components/UserCard';
-import { UserSearch } from '../components/SearchBar';
-import { User } from '../types';
+import { UserCard } from './UserCard';
+import { UserSearch } from './SearchBar';
+import { UserInfo } from '../types/user';
 import { getUsers } from '../api/users';
 
-export const UsersCardsList = () => {
+export const UsersList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const page = Number(searchParams.get('page')) || 1;
@@ -58,7 +58,7 @@ export const UsersCardsList = () => {
               xxl: 6,
             }}
             dataSource={data.users}
-            renderItem={(user: User) => (
+            renderItem={(user: UserInfo) => (
               <List.Item key={user.id}>
                 <UserCard user={user} />
               </List.Item>

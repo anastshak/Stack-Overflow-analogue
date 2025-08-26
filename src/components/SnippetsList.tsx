@@ -1,17 +1,17 @@
-import { PostCard } from '../components/PostCard';
+import { SnippetCard } from './SnippetCard';
 import { useQuery } from '@tanstack/react-query';
-import { getPosts } from '../api/posts';
+import { getSnippets } from '../api/snippets';
 import { Alert, Empty, List, Spin } from 'antd';
-import { SnippetModel } from '../types';
+import { SnippetModel } from '../types/snippet';
 import { useSearchParams } from 'react-router-dom';
 
-export const PostCardList = () => {
+export const SnippetsList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = parseInt(searchParams.get('page') || '1', 10);
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['snippets', page],
-    queryFn: () => getPosts(page, 5),
+    queryFn: () => getSnippets(page, 5),
   });
 
   if (isLoading) {
@@ -49,7 +49,7 @@ export const PostCardList = () => {
         showSizeChanger: false,
       }}
       dataSource={data?.snippets || []}
-      renderItem={(snippet: SnippetModel) => <PostCard key={snippet.id} snippet={snippet} />}
+      renderItem={(snippet: SnippetModel) => <SnippetCard key={snippet.id} snippet={snippet} />}
     />
   );
 };

@@ -1,10 +1,10 @@
 import { Layout } from '../components/Layout';
-import { UsersCardsList } from '../components/UserCardsList';
+import { UsersList } from '../components/UsersList';
 
 export const Users = () => {
   return (
     <Layout>
-      <UsersCardsList />
+      <UsersList />
     </Layout>
   );
 };

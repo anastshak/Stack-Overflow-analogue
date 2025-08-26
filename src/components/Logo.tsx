@@ -7,6 +7,7 @@ interface LogoProps {
 
 export const Logo = ({ isDisplay }: LogoProps) => {
   const navigate = useNavigate();
+
   return (
     <div className="flex items-center gap-2 hover:cursor-pointer" onClick={() => navigate('/')}>
       <div className="flex items-center">

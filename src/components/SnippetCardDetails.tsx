@@ -1,21 +1,21 @@
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Spin, Alert, Empty } from 'antd';
-import { getPostById } from '../api/postByID';
-import { PostCard } from '../components/PostCard';
-import { CommentCard } from '../components/CommentCard';
-import { CommentInfo } from '../types';
-import { useAuthStore } from '../store/authStore';
+import { getSnippetById } from '../api/snippets';
+import { SnippetCard } from './SnippetCard';
+import { CommentCard } from './CommentCard';
 import { CommentForm } from './CommentForm';
+import { CommentInfo } from '../types/snippet';
+import { useAuthStore } from '../store/authStore';
 
-export const CommentCardsList = () => {
+export const SnippetCardDetails = () => {
   const { isAuthenticated } = useAuthStore();
 
   const { id } = useParams<{ id: string }>();
 
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: ['post', id],
-    queryFn: () => getPostById(id!),
+    queryKey: ['snippet', id],
+    queryFn: () => getSnippetById(id!),
     enabled: !!id,
   });
 
@@ -44,7 +44,7 @@ export const CommentCardsList = () => {
 
   return (
     <div className="p-6">
-      <PostCard snippet={data.snippet} />
+      <SnippetCard snippet={data.snippet} />
 
       {data.comments.length > 0 ? (
         <>

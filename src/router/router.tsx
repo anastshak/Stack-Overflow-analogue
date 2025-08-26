@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { Home } from '../pages/Home';
-import { PostDetails } from '../pages/PostDetails';
+import { SnippetDetails } from '../pages/SnippetDetails';
 import { Register } from '../pages/Register';
 import { Login } from '../pages/Login';
 import { Users } from '../pages/Users';
@@ -13,7 +13,7 @@ export const router = createBrowserRouter([
   },
   {
     path: '/posts/:id',
-    element: <PostDetails />,
+    element: <SnippetDetails />,
   },
   {
     path: '/signup',

@@ -1,10 +1,10 @@
 import { Card, Avatar, Tag } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import { User } from '../types';
+import { UserInfo } from '../types/user';
 import { useNavigate } from 'react-router-dom';
 
 interface UserCardCompactProps {
-  user: User;
+  user: UserInfo;
 }
 
 export const UserCard = ({ user }: UserCardCompactProps) => {

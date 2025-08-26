@@ -17,7 +17,7 @@ export const CommentForm = ({ snippetId }: CommentFormProps) => {
     onSuccess: () => {
       message.success('Comment added!');
       setValue('');
-      queryClient.invalidateQueries({ queryKey: ['post', snippetId] });
+      queryClient.invalidateQueries({ queryKey: ['snippet', snippetId] });
     },
     onError: () => {
       message.error('Failed to add comment');

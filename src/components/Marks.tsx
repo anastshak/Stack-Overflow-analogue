@@ -1,6 +1,6 @@
 import { message, Spin } from 'antd';
 import { DislikeOutlined, DislikeTwoTone, LikeOutlined, LikeTwoTone } from '@ant-design/icons';
-import { SnippetModel } from '../types';
+import { SnippetModel } from '../types/snippet';
 import { useAuthStore } from '../store/authStore';
 import { useMutation } from '@tanstack/react-query';
 import { markPost } from '../api/mark';
@@ -17,7 +17,7 @@ export const MarksSnap = ({ snippet }: MarksSnapProps) => {
     mutationFn: (mark: 'like' | 'dislike') => markPost(snippet.id, mark),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['snippets'] });
-      queryClient.invalidateQueries({ queryKey: ['post', snippet.id] });
+      queryClient.invalidateQueries({ queryKey: ['snippet', snippet.id] });
     },
     onError: () => {
       message.error('Failed to mark post');

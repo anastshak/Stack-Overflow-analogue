@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { UserInfo } from '../types';
+import { UserInfo } from '../types/user';
 import { queryClient } from '../utils/queryClient';
 
 interface AuthState {

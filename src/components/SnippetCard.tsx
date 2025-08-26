@@ -3,16 +3,15 @@ import { Card } from 'antd';
 import { CodeOutlined, CommentOutlined, UserOutlined } from '@ant-design/icons';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { duotoneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { SnippetModel } from '../types';
-import cn from 'classnames';
+import { SnippetModel } from '../types/snippet';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { MarksSnap } from './Marks';
 
-interface PostCardProps {
+interface SnippetCardProps {
   snippet: SnippetModel;
 }
 
-export const PostCard = ({ snippet }: PostCardProps) => {
+export const SnippetCard = ({ snippet }: SnippetCardProps) => {
   const navigate = useNavigate();
 
   const location = useLocation();
@@ -25,7 +24,7 @@ export const PostCard = ({ snippet }: PostCardProps) => {
 
   return (
     <div className="mb-4">
-      <Card className={cn('shadow-md rounded-lg')}>
+      <Card className={'shadow-md rounded-lg'}>
         <div className="flex justify-between items-center mb-2 text-gray-500">
           <span className="font-medium">
             <UserOutlined /> {snippet.creator}
