@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Spin, Empty, Pagination, Alert, List } from 'antd';
 import { useSearchParams } from 'react-router-dom';
 import { UserCard } from './UserCard';
-import { UserSearch } from './SearchBar';
+import { SearchBar } from './SearchBar';
 import { UserInfo } from '../types/user';
 import { getUsers } from '../api/users';
 
@@ -39,7 +39,7 @@ export const UsersList = () => {
 
   return (
     <div className="container mx-auto px-4 py-6">
-      <UserSearch initialValue={search} onSearch={handleSearch} loading={isLoading} />
+      <SearchBar initialValue={search} onSearch={handleSearch} loading={isLoading} />
 
       {isLoading ? (
         <div className="flex justify-center items-center h-64">

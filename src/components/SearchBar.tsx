@@ -3,7 +3,7 @@ import type { GetProps } from 'antd';
 
 export type SearchProps = GetProps<typeof Input.Search>;
 
-interface UserSearchProps {
+interface SearchBarProps {
   initialValue?: string;
   onSearch: (value: string) => void;
   loading?: boolean;
@@ -11,7 +11,7 @@ interface UserSearchProps {
 
 const { Search } = Input;
 
-export const UserSearch = ({ initialValue = '', onSearch, loading = false }: UserSearchProps) => {
+export const SearchBar = ({ initialValue = '', onSearch, loading = false }: SearchBarProps) => {
   return (
     <div className="flex justify-center mb-6">
       <Search
