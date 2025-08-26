@@ -5,6 +5,7 @@ import { Button, Card, Form, Input, message } from 'antd';
 import { registerSchema, RegisterFormData } from '../utils/validationRegisterSchema';
 import { registerUser } from '../api/auth';
 import axios from 'axios';
+import { useMutation } from '@tanstack/react-query';
 
 export const RegisterForm = () => {
   const navigate = useNavigate();
@@ -22,12 +23,13 @@ export const RegisterForm = () => {
     },
   });
 
-  const onSubmit = async (values: RegisterFormData) => {
-    try {
-      await registerUser(values.username, values.password);
+  const mutation = useMutation({
+    mutationFn: (values: RegisterFormData) => registerUser(values.username, values.password),
+    onSuccess: () => {
       message.success('Registration is successful! Log in to the system');
       navigate('/login');
-    } catch (err) {
+    },
+    onError: (err) => {
       if (axios.isAxiosError(err)) {
         message.error(err.response?.data?.message || 'Registration error');
       } else if (err instanceof Error) {
@@ -35,7 +37,11 @@ export const RegisterForm = () => {
       } else {
         message.error('Unknown registration error');
       }
-    }
+    },
+  });
+
+  const onSubmit = (values: RegisterFormData) => {
+    mutation.mutate(values);
   };
 
   return (

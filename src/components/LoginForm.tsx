@@ -6,6 +6,7 @@ import { loginSchema, LoginFormData } from '../utils/validationLoginSchema';
 import { loginUser } from '../api/auth';
 import axios from 'axios';
 import { useAuthStore } from '../store/authStore';
+import { useMutation } from '@tanstack/react-query';
 
 export const LoginForm = () => {
   const navigate = useNavigate();
@@ -22,20 +23,26 @@ export const LoginForm = () => {
     },
   });
 
-  const onSubmit = async (values: LoginFormData) => {
-    try {
-      const data = await loginUser(values.username, values.password);
+  const mutation = useMutation({
+    mutationFn: (values: LoginFormData) => loginUser(values.username, values.password),
+    onSuccess: (data) => {
       useAuthStore.getState().login(data);
-
       message.success(`Welcome, ${data.username}`);
       navigate('/');
-    } catch (err) {
+    },
+    onError: (err) => {
       if (axios.isAxiosError(err)) {
         message.error(err.response?.data?.message || 'Login error');
       } else if (err instanceof Error) {
         message.error(err.message);
+      } else {
+        message.error('Unknown login error');
       }
-    }
+    },
+  });
+
+  const onSubmit = (values: LoginFormData) => {
+    mutation.mutate(values);
   };
 
   return (
