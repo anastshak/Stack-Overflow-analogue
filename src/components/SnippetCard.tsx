@@ -43,7 +43,7 @@ export const SnippetCard = ({ snippet }: SnippetCardProps) => {
           {/* marks */}
           <MarksSnap snippet={snippet} />
           {/* comments */}
-          <span onClick={handleCommentsClick} className={hoverComments}>
+          <span onClick={location.pathname === '/' ? handleCommentsClick : undefined} className={hoverComments}>
             <CommentOutlined className="mr-1" /> {snippet.commentsCount}
           </span>
         </div>

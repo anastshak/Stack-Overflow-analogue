@@ -62,7 +62,7 @@ export const Sidebar = () => {
       )}
 
       <Menu
-        className="h-full bg-blue-700 custom-menu"
+        className="bg-blue-700 custom-menu"
         mode="inline"
         theme="dark"
         defaultSelectedKeys={['home']}
