@@ -1,12 +1,14 @@
 import { Button, message } from 'antd';
 import { Logo } from './Logo';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
 import { useMutation } from '@tanstack/react-query';
 import { logoutUser } from '../api/auth';
 
 export const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const { isAuthenticated, clear } = useAuthStore();
 
   const mutation = useMutation({
@@ -32,9 +34,12 @@ export const Header = () => {
       <Logo isDisplay />
       <div className="flex gap-4 items-center">
         {isAuthenticated ? (
-          <Button onClick={logout} loading={mutation.isPending}>
-            Logout
-          </Button>
+          <>
+            {location.pathname === '/questions' && <Button onClick={() => {}}>Ask question</Button>}
+            <Button onClick={logout} loading={mutation.isPending}>
+              Logout
+            </Button>
+          </>
         ) : (
           <>
             <Button

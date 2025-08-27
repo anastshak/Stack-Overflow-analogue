@@ -6,6 +6,7 @@ import { Login } from '../pages/Login';
 import { Users } from '../pages/Users';
 import { UserDetails } from '../pages/UserDetails';
 import { Questions } from '../pages/Questions';
+import { QuestionDetails } from '../pages/QuestionDetails';
 
 export const router = createBrowserRouter([
   {
@@ -35,5 +36,9 @@ export const router = createBrowserRouter([
   {
     path: '/questions',
     element: <Questions />,
+  },
+  {
+    path: '/questions/:id',
+    element: <QuestionDetails />,
   },
 ]);
