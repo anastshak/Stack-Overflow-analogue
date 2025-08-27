@@ -1,9 +1,11 @@
 import { SnippetCard } from './SnippetCard';
 import { useQuery } from '@tanstack/react-query';
 import { getSnippets } from '../api/snippets';
-import { Alert, Empty, List, Spin } from 'antd';
+import { Empty, List } from 'antd';
 import { SnippetModel } from '../types/snippet';
 import { useSearchParams } from 'react-router-dom';
+import { Loader } from './Loader';
+import { ErrorMsg } from './Error';
 
 export const SnippetsList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -15,22 +17,11 @@ export const SnippetsList = () => {
   });
 
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <Spin size="large" />
-      </div>
-    );
+    return <Loader />;
   }
 
   if (isError) {
-    return (
-      <Alert
-        message="Error"
-        description={error instanceof Error ? error.message : 'Failed to load posts'}
-        type="error"
-        showIcon
-      />
-    );
+    return <ErrorMsg msg="posts" errorObj={error} />;
   }
 
   if (!data?.snippets || data.snippets.length === 0) {

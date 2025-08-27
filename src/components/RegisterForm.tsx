@@ -1,11 +1,12 @@
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate, Link } from 'react-router-dom';
-import { Button, Card, Form, Input, message, Spin } from 'antd';
+import { Button, Card, Form, Input, message } from 'antd';
 import { registerSchema, RegisterFormData } from '../utils/validationRegisterSchema';
 import { registerUser } from '../api/auth';
 import axios from 'axios';
 import { useMutation } from '@tanstack/react-query';
+import { Loader } from './Loader';
 
 export const RegisterForm = () => {
   const navigate = useNavigate();
@@ -41,11 +42,7 @@ export const RegisterForm = () => {
   });
 
   if (mutation.status === 'pending') {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <Spin size="large" />
-      </div>
-    );
+    return <Loader />;
   }
 
   const onSubmit = (values: RegisterFormData) => {

@@ -1,8 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { getQuestions } from '../api/questions';
-import { Spin, Alert, Empty, List } from 'antd';
+import { Empty, List } from 'antd';
 import { QuestionCard } from '../components/QuestionCard';
 import { useSearchParams } from 'react-router-dom';
+import { Loader } from './Loader';
+import { ErrorMsg } from './Error';
 
 export const QuestionsList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -14,22 +16,11 @@ export const QuestionsList = () => {
   });
 
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <Spin size="large" />
-      </div>
-    );
+    return <Loader />;
   }
 
   if (isError) {
-    return (
-      <Alert
-        message="Error"
-        description={error instanceof Error ? error.message : 'Failed to load questions'}
-        type="error"
-        showIcon
-      />
-    );
+    return <ErrorMsg msg="questions" errorObj={error} />;
   }
 
   if (!data?.questions || data.questions.length === 0) {

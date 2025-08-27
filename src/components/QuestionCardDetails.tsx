@@ -1,9 +1,11 @@
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getQuestionById } from '../api/questions';
-import { Spin, Alert, Empty } from 'antd';
+import { Empty } from 'antd';
 import { QuestionCard } from '../components/QuestionCard';
 import { AnswerCard } from '../components/AnswerCard';
+import { Loader } from './Loader';
+import { ErrorMsg } from './Error';
 
 export const QuestionCardDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -15,22 +17,11 @@ export const QuestionCardDetails = () => {
   });
 
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <Spin size="large" />
-      </div>
-    );
+    return <Loader />;
   }
 
   if (isError) {
-    return (
-      <Alert
-        message="Error"
-        description={error instanceof Error ? error.message : 'Failed to load question'}
-        type="error"
-        showIcon
-      />
-    );
+    return <ErrorMsg msg="question" errorObj={error} />;
   }
 
   if (!data) {

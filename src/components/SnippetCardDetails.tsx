@@ -1,12 +1,14 @@
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { Spin, Alert, Empty } from 'antd';
+import { Empty } from 'antd';
 import { getSnippetById } from '../api/snippets';
 import { SnippetCard } from './SnippetCard';
 import { CommentCard } from './CommentCard';
 import { CommentForm } from './CommentForm';
 import { CommentInfo } from '../types/snippet';
 import { useAuthStore } from '../store/authStore';
+import { Loader } from './Loader';
+import { ErrorMsg } from './Error';
 
 export const SnippetCardDetails = () => {
   const { isAuthenticated } = useAuthStore();
@@ -20,22 +22,11 @@ export const SnippetCardDetails = () => {
   });
 
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <Spin size="large" />
-      </div>
-    );
+    return <Loader />;
   }
 
   if (isError) {
-    return (
-      <Alert
-        message="Error"
-        description={error instanceof Error ? error.message : 'Failed to load post'}
-        type="error"
-        showIcon
-      />
-    );
+    return <ErrorMsg msg="post" errorObj={error} />;
   }
 
   if (!data) {

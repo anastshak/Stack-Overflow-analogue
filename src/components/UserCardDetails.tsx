@@ -1,4 +1,4 @@
-import { Card, Avatar, Tag, Tooltip, Spin, Alert, Empty, Row, Col, Statistic } from 'antd';
+import { Card, Avatar, Tag, Tooltip, Empty, Row, Col, Statistic } from 'antd';
 import {
   CodeOutlined,
   CommentOutlined,
@@ -15,6 +15,8 @@ import { useParams } from 'react-router-dom';
 import { getUserStatistic } from '../api/users';
 import { useQuery } from '@tanstack/react-query';
 import { formatNumber } from '../utils/formatNumber';
+import { Loader } from './Loader';
+import { ErrorMsg } from './Error';
 
 export const UserCardDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -26,22 +28,11 @@ export const UserCardDetails = () => {
   });
 
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-96">
-        <Spin size="large" />
-      </div>
-    );
+    return <Loader />;
   }
 
   if (isError) {
-    return (
-      <Alert
-        message="Error"
-        description={error instanceof Error ? error.message : 'Failed to load user profile'}
-        type="error"
-        showIcon
-      />
-    );
+    return <ErrorMsg msg="user profile" errorObj={error} />;
   }
 
   if (!data) {

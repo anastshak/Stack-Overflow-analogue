@@ -1,10 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import { Spin, Empty, Pagination, Alert, List } from 'antd';
+import { Empty, Pagination, List } from 'antd';
 import { useSearchParams } from 'react-router-dom';
 import { UserCard } from './UserCard';
 import { SearchBar } from './SearchBar';
 import { UserInfo } from '../types/user';
 import { getUsers } from '../api/users';
+import { Loader } from './Loader';
+import { ErrorMsg } from './Error';
 
 export const UsersList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -27,14 +29,7 @@ export const UsersList = () => {
   };
 
   if (isError) {
-    return (
-      <Alert
-        message="Error"
-        description={error instanceof Error ? error.message : 'Failed to load users'}
-        type="error"
-        showIcon
-      />
-    );
+    return <ErrorMsg msg="users" errorObj={error} />;
   }
 
   return (
@@ -42,9 +37,7 @@ export const UsersList = () => {
       <SearchBar initialValue={search} onSearch={handleSearch} loading={isLoading} />
 
       {isLoading ? (
-        <div className="flex justify-center items-center h-64">
-          <Spin size="large" />
-        </div>
+        <Loader />
       ) : data?.users?.length ? (
         <>
           <List
