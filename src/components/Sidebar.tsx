@@ -11,13 +11,36 @@ export const Sidebar = () => {
 
   const selectedKey = (() => {
     if (location.pathname === '/') return 'home';
-    if (location.pathname === '/users') return 'users';
     // if (location.pathname.startsWith('/snippets')) return 'snippets';
     // if (location.pathname.startsWith('/account')) return 'account';
     // if (location.pathname.startsWith('/post')) return 'post';
-    // if (location.pathname.startsWith('/questions')) return 'questions';
+    if (location.pathname === '/questions') return 'questions';
+    if (location.pathname === '/users') return 'users';
     return '';
   })();
+
+  const handleMenuClick = ({ key }: { key: string }) => {
+    switch (key) {
+      case 'home':
+        navigate('/');
+        break;
+      // case 'account':
+      //   navigate('/account');
+      //   break;
+      // case 'post':
+      //   navigate('/post');
+      //   break;
+      // case 'snippets':
+      //   navigate('/snippets');
+      //   break;
+      case 'questions':
+        navigate('/questions');
+        break;
+      case 'users':
+        navigate('/users');
+        break;
+    }
+  };
 
   return (
     <aside className="w-64 bg-blue-700 text-white">
@@ -44,13 +67,14 @@ export const Sidebar = () => {
         theme="dark"
         defaultSelectedKeys={['home']}
         selectedKeys={[selectedKey]}
+        onClick={handleMenuClick}
         items={[
-          { key: 'home', icon: <HomeOutlined />, label: 'Home', onClick: () => navigate('/') },
+          { key: 'home', icon: <HomeOutlined />, label: 'Home' },
           { key: 'account', icon: <UserOutlined />, label: 'My Account', disabled: !isAuthenticated },
           { key: 'post', icon: <FileTextOutlined />, label: 'Post Snippet', disabled: !isAuthenticated },
           { key: 'snippets', icon: <FileTextOutlined />, label: 'My Snippets', disabled: !isAuthenticated },
           { key: 'questions', icon: <QuestionCircleOutlined />, label: 'Questions' },
-          { key: 'users', icon: <TeamOutlined />, label: 'Users', onClick: () => navigate('/users') },
+          { key: 'users', icon: <TeamOutlined />, label: 'Users' },
         ]}
       />
     </aside>
