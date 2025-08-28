@@ -8,7 +8,6 @@ import { CommentForm } from './CommentForm';
 import { CommentInfo } from '../types/snippet';
 import { useAuthStore } from '../store/authStore';
 import { Loader } from './Loader';
-import { ErrorMsg } from './Error';
 
 export const SnippetCardDetails = () => {
   const { isAuthenticated } = useAuthStore();
@@ -26,7 +25,7 @@ export const SnippetCardDetails = () => {
   }
 
   if (isError) {
-    return <ErrorMsg msg="post" errorObj={error} />;
+    throw error;
   }
 
   if (!data) {

@@ -6,7 +6,6 @@ import { SearchBar } from './SearchBar';
 import { UserInfo } from '../types/user';
 import { getUsers } from '../api/users';
 import { Loader } from './Loader';
-import { ErrorMsg } from './Error';
 
 export const UsersList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -29,7 +28,7 @@ export const UsersList = () => {
   };
 
   if (isError) {
-    return <ErrorMsg msg="users" errorObj={error} />;
+    throw error;
   }
 
   return (

@@ -5,7 +5,6 @@ import { Empty, List } from 'antd';
 import { SnippetModel } from '../types/snippet';
 import { useSearchParams } from 'react-router-dom';
 import { Loader } from './Loader';
-import { ErrorMsg } from './Error';
 
 export const SnippetsList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -21,7 +20,7 @@ export const SnippetsList = () => {
   }
 
   if (isError) {
-    return <ErrorMsg msg="posts" errorObj={error} />;
+    throw error;
   }
 
   if (!data?.snippets || data.snippets.length === 0) {

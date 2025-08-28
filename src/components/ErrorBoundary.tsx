@@ -1,5 +1,5 @@
 import React, { Component, ReactNode } from 'react';
-import { Result, Button } from 'antd';
+import { Result } from 'antd';
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -24,11 +24,6 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
     console.error('Uncaught error:', error, errorInfo);
   }
 
-  handleReload = () => {
-    this.setState({ hasError: false, error: null });
-    window.location.reload();
-  };
-
   render() {
     if (this.state.hasError) {
       return (
@@ -37,11 +32,6 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
             status="500"
             title="Something went wrong"
             subTitle={this.state.error?.message || 'An unexpected error occurred'}
-            extra={
-              <Button type="primary" onClick={this.handleReload}>
-                Reload Page
-              </Button>
-            }
           />
         </div>
       );

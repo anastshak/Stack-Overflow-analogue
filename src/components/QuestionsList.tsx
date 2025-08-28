@@ -4,7 +4,6 @@ import { Empty, List } from 'antd';
 import { QuestionCard } from '../components/QuestionCard';
 import { useSearchParams } from 'react-router-dom';
 import { Loader } from './Loader';
-import { ErrorMsg } from './Error';
 
 export const QuestionsList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -20,7 +19,7 @@ export const QuestionsList = () => {
   }
 
   if (isError) {
-    return <ErrorMsg msg="questions" errorObj={error} />;
+    throw error;
   }
 
   if (!data?.questions || data.questions.length === 0) {

@@ -16,7 +16,6 @@ import { getUserStatistic } from '../api/users';
 import { useQuery } from '@tanstack/react-query';
 import { formatNumber } from '../utils/formatNumber';
 import { Loader } from './Loader';
-import { ErrorMsg } from './Error';
 
 export const UserCardDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -32,7 +31,7 @@ export const UserCardDetails = () => {
   }
 
   if (isError) {
-    return <ErrorMsg msg="user profile" errorObj={error} />;
+    throw error;
   }
 
   if (!data) {

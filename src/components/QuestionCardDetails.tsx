@@ -5,7 +5,6 @@ import { Empty } from 'antd';
 import { QuestionCard } from '../components/QuestionCard';
 import { AnswerCard } from '../components/AnswerCard';
 import { Loader } from './Loader';
-import { ErrorMsg } from './Error';
 
 export const QuestionCardDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -19,9 +18,8 @@ export const QuestionCardDetails = () => {
   if (isLoading) {
     return <Loader />;
   }
-
   if (isError) {
-    return <ErrorMsg msg="question" errorObj={error} />;
+    throw error;
   }
 
   if (!data) {
