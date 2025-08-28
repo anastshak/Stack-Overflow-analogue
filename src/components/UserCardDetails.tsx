@@ -16,9 +16,16 @@ import { getUserStatistic } from '../api/users';
 import { useQuery } from '@tanstack/react-query';
 import { formatNumber } from '../utils/formatNumber';
 import { Loader } from './Loader';
+import { useAuthStore } from '../store/authStore';
 
-export const UserCardDetails = () => {
-  const { id } = useParams<{ id: string }>();
+interface UserCardDetailsProps {
+  isMyAccount?: boolean;
+}
+
+export const UserCardDetails = ({ isMyAccount = false }: UserCardDetailsProps) => {
+  const { user } = useAuthStore();
+  const params = useParams();
+  const id = isMyAccount ? user?.id : params.id;
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['user', id],
@@ -35,25 +42,27 @@ export const UserCardDetails = () => {
   }
 
   if (!data) {
-    return <Empty description="User not found" image={Empty.PRESENTED_IMAGE_SIMPLE} className="pt-16" />;
+    return <Empty description="User not found" className="pt-16" />;
   }
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       {/* Header Section */}
       <Card className="shadow-lg">
-        <div className="flex gap-8 flex-col sm:flex-row items-center mx-4 sm:my-0 sm:mx-6">
+        <div className="flex gap-8 flex-col lg:flex-row justify-center items-center mx-4 sm:my-0 sm:mx-6">
           <Avatar size={96} icon={<UserOutlined />} className="shadow-xl flex-shrink-0" />
 
           <div className="flex-1 text-center sm:text-left">
-            <div className="flex flex-col gap-3 sm:flex-row items-center">
-              <h1 className="text-3xl font-bold">{data.username}</h1>
-              <Tag color={'blue'} icon={<UserOutlined />} className="capitalize">
+            <div className="flex flex-col lg:flex-row items-start sm:items-center gap-3">
+              <Tooltip title={data.username}>
+                <h1 className="text-2xl font-bold cursor-help truncate min-w-0 max-w-[250px]">{data.username}</h1>
+              </Tooltip>
+              <Tag color={'blue'} icon={<UserOutlined />} className="capitalize flex-shrink-0">
                 {data.role}
               </Tag>
             </div>
 
-            <p className="text-gray-500 text-sm my-3">User ID: {data.id}</p>
+            <p className="text-gray-500 text-sm text-center lg:text-left my-3">User ID: {data.id}</p>
           </div>
 
           {/* rating + snippets count */}
@@ -79,7 +88,7 @@ export const UserCardDetails = () => {
 
       {/* Statistics Grid */}
       <Row gutter={[16, 16]} className="my-6">
-        <Col xs={12} sm={8} lg={6}>
+        <Col xs={12} sm={12} lg={6}>
           <Statistic
             title="Code Snippets"
             value={data.statistic.snippetsCount}
@@ -89,7 +98,7 @@ export const UserCardDetails = () => {
           />
         </Col>
 
-        <Col xs={12} sm={8} lg={6}>
+        <Col xs={12} sm={12} lg={6}>
           <Statistic
             title="Comments"
             value={data.statistic.commentsCount}
@@ -99,7 +108,7 @@ export const UserCardDetails = () => {
           />
         </Col>
 
-        <Col xs={12} sm={8} lg={6}>
+        <Col xs={12} sm={12} lg={6}>
           <Statistic
             title="Questions"
             value={data.statistic.questionsCount}
@@ -109,7 +118,7 @@ export const UserCardDetails = () => {
           />
         </Col>
 
-        <Col xs={12} sm={8} lg={6}>
+        <Col xs={12} sm={12} lg={6}>
           <Statistic
             title="Marks"
             value={data.statistic.likesCount + data.statistic.dislikesCount}
