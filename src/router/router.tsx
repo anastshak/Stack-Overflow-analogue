@@ -7,8 +7,10 @@ import { Users } from '../pages/Users';
 import { UserDetails } from '../pages/UserDetails';
 import { Questions } from '../pages/Questions';
 import { QuestionDetails } from '../pages/QuestionDetails';
+import { PageNotFound } from '../pages/NotFoundError';
+import { ErrorBoundary } from '../components/ErrorBoundary';
 
-export const router = createBrowserRouter([
+const routes = [
   {
     path: '/',
     element: <Home />,
@@ -41,4 +43,13 @@ export const router = createBrowserRouter([
     path: '/questions/:id',
     element: <QuestionDetails />,
   },
-]);
+  {
+    path: '*',
+    element: <PageNotFound />,
+  },
+].map((route) => ({
+  ...route,
+  element: <ErrorBoundary>{route.element}</ErrorBoundary>,
+}));
+
+export const router = createBrowserRouter(routes);
