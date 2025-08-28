@@ -1,4 +1,4 @@
-# custom-components-lib
+# stack-overflow-analogue
 
 ## Task
 
