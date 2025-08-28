@@ -3,42 +3,30 @@ import { HomeOutlined, UserOutlined, FileTextOutlined, QuestionCircleOutlined, T
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
 
+const menuItemsConfig = [
+  { key: 'home', label: 'Home', icon: <HomeOutlined />, address: '/' },
+  { key: 'account', label: 'My Account', icon: <UserOutlined />, address: '/account', authOnly: true },
+  { key: 'post', label: 'Post Snippet', icon: <FileTextOutlined />, address: '/post', authOnly: true },
+  { key: 'snippets', label: 'My Snippets', icon: <FileTextOutlined />, address: '/snippets', authOnly: true },
+  { key: 'questions', label: 'Questions', icon: <QuestionCircleOutlined />, address: '/questions' },
+  { key: 'users', label: 'Users', icon: <TeamOutlined />, address: '/users' },
+];
+
 export const Sidebar = () => {
   const { isAuthenticated, user } = useAuthStore();
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  const selectedKey = (() => {
-    if (location.pathname === '/') return 'home';
-    // if (location.pathname.startsWith('/snippets')) return 'snippets';
-    // if (location.pathname.startsWith('/account')) return 'account';
-    // if (location.pathname.startsWith('/post')) return 'post';
-    if (location.pathname === '/questions') return 'questions';
-    if (location.pathname === '/users') return 'users';
-    return '';
-  })();
+  const getSelectedKey = () => {
+    const match = menuItemsConfig.find((page) => location.pathname === page.address);
+    return match ? match.key : '';
+  };
 
   const handleMenuClick = ({ key }: { key: string }) => {
-    switch (key) {
-      case 'home':
-        navigate('/');
-        break;
-      // case 'account':
-      //   navigate('/account');
-      //   break;
-      // case 'post':
-      //   navigate('/post');
-      //   break;
-      // case 'snippets':
-      //   navigate('/snippets');
-      //   break;
-      case 'questions':
-        navigate('/questions');
-        break;
-      case 'users':
-        navigate('/users');
-        break;
+    const item = menuItemsConfig.find((page) => page.key === key);
+    if (item?.address) {
+      navigate(item.address);
     }
   };
 
@@ -66,16 +54,14 @@ export const Sidebar = () => {
         mode="inline"
         theme="dark"
         defaultSelectedKeys={['home']}
-        selectedKeys={[selectedKey]}
+        selectedKeys={[getSelectedKey()]}
         onClick={handleMenuClick}
-        items={[
-          { key: 'home', icon: <HomeOutlined />, label: 'Home' },
-          { key: 'account', icon: <UserOutlined />, label: 'My Account', disabled: !isAuthenticated },
-          { key: 'post', icon: <FileTextOutlined />, label: 'Post Snippet', disabled: !isAuthenticated },
-          { key: 'snippets', icon: <FileTextOutlined />, label: 'My Snippets', disabled: !isAuthenticated },
-          { key: 'questions', icon: <QuestionCircleOutlined />, label: 'Questions' },
-          { key: 'users', icon: <TeamOutlined />, label: 'Users' },
-        ]}
+        items={menuItemsConfig.map((item) => ({
+          key: item.key,
+          icon: item.icon,
+          label: item.label,
+          disabled: item.authOnly && !isAuthenticated,
+        }))}
       />
     </aside>
   );
