@@ -4,12 +4,16 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
 import { useMutation } from '@tanstack/react-query';
 import { logoutUser } from '../api/auth';
+import { useState } from 'react';
+import { AskQuestionModal } from './AskQuestionModal';
 
 export const Header = () => {
+  const { isAuthenticated, clear } = useAuthStore();
+
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { isAuthenticated, clear } = useAuthStore();
+  const [modalOpen, setModalOpen] = useState(false);
 
   const mutation = useMutation({
     mutationFn: logoutUser,
@@ -29,13 +33,22 @@ export const Header = () => {
     mutation.mutate();
   };
 
+  const handleAskQuestionClick = () => {
+    setModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setModalOpen(false);
+    navigate('/questions');
+  };
+
   return (
     <header className="flex justify-between items-center bg-blue-600 px-6 py-4 text-white">
       <Logo isDisplay />
       <div className="flex gap-4 items-center">
         {isAuthenticated ? (
           <>
-            {location.pathname === '/questions' && <Button onClick={() => {}}>Ask question</Button>}
+            {location.pathname === '/questions' && <Button onClick={handleAskQuestionClick}>Ask question</Button>}
             <Button onClick={logout} loading={mutation.isPending}>
               Logout
             </Button>
@@ -60,6 +73,8 @@ export const Header = () => {
           </>
         )}
       </div>
+
+      <AskQuestionModal open={modalOpen} onClose={handleModalClose} />
     </header>
   );
 };
