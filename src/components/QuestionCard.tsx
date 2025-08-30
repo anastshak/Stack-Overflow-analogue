@@ -1,10 +1,13 @@
-import { Card, Avatar } from 'antd';
-import { CheckCircleTwoTone, ClockCircleTwoTone, QuestionCircleOutlined } from '@ant-design/icons';
+import React, { useState } from 'react';
+import { Card, Avatar, Button } from 'antd';
+import { CheckCircleTwoTone, ClockCircleTwoTone, EditTwoTone, QuestionCircleOutlined } from '@ant-design/icons';
 import { Question } from '../types/question';
 import { useNavigate } from 'react-router-dom';
 import cn from 'classnames';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { duotoneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { useAuthStore } from '../store/authStore';
+import { EditQuestionModal } from './EditQuestionModal';
 
 interface QuestionCardProps {
   question: Question;
@@ -12,10 +15,24 @@ interface QuestionCardProps {
 }
 
 export const QuestionCard = ({ question, isFullVersion = false }: QuestionCardProps) => {
+  const { user } = useAuthStore();
+  const isOwner = user?.id === question.user.id;
+
+  const [modalOpen, setModalOpen] = useState(false);
+
   const navigate = useNavigate();
 
   const handleQuestionClick = () => {
     navigate(`/questions/${question.id}`);
+  };
+
+  const handleEditQuestion = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setModalOpen(false);
   };
 
   const customStyle = {
@@ -36,8 +53,16 @@ export const QuestionCard = ({ question, isFullVersion = false }: QuestionCardPr
               <h3 className="font-semibold text-lg">{question.title}</h3>
               <p className="text-xs text-gray-500">asked by user: {question.user.username}</p>
             </div>
-            <span className="text-2xl">
+            <span className="text-3xl flex flex-col md:flex-row items-center justify-center gap-1">
               {question.isResolved ? <CheckCircleTwoTone twoToneColor="#52c41a" /> : <ClockCircleTwoTone />}
+              {isOwner && (
+                <Button
+                  type="primary"
+                  shape="circle"
+                  onClick={handleEditQuestion}
+                  icon={<EditTwoTone twoToneColor="white" />}
+                ></Button>
+              )}
             </span>
           </div>
         </div>
@@ -64,6 +89,8 @@ export const QuestionCard = ({ question, isFullVersion = false }: QuestionCardPr
           </div>
         )}
       </Card>
+
+      <EditQuestionModal open={modalOpen} onClose={handleModalClose} question={question} />
     </div>
   );
 };
