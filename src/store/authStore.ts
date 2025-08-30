@@ -8,6 +8,7 @@ interface AuthState {
   login: (user: UserInfo) => void;
   clear: () => void;
   restore: () => void;
+  updateUser: (updates: Partial<UserInfo>) => void;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
@@ -31,5 +32,16 @@ export const useAuthStore = create<AuthState>((set) => ({
     if (user) {
       set({ user: JSON.parse(user), isAuthenticated: true });
     }
+  },
+
+  updateUser: (updates) => {
+    set((state) => {
+      if (!state.user) return state;
+
+      const updatedUser = { ...state.user, ...updates };
+      localStorage.setItem('user', JSON.stringify(updatedUser));
+
+      return { user: updatedUser };
+    });
   },
 }));
