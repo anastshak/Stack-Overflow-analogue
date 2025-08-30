@@ -12,7 +12,7 @@ export const registerSchema = z
       .transform((username) => username.trim().toLowerCase()),
     password: z
       .string()
-      .min(5, 'Username must be at least 5 characters')
+      .min(5, 'Password must be at least 5 characters')
       .regex(/[a-z]/, {
         message: 'Password must contain at least one lowercase letter',
       })
