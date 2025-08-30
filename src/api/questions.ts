@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { ApiQuestionsResponse } from '../types/api';
-import { Question } from '../types/question';
+import { ApiModifyQuestion, Question } from '../types/question';
 
 export const getQuestions = async (
   page: number,
@@ -17,8 +17,22 @@ export const getQuestionById = async (id: string): Promise<Question> => {
   return response.data.data;
 };
 
-export const createQuestion = async (title: string, description: string, attachedCode: string) => {
-  const response = await axios.post(`/api/questions/`, { title, description, attachedCode });
+export const createQuestion = async (values: ApiModifyQuestion) => {
+  const response = await axios.post(`/api/questions/`, values);
+  const questionData = response.data.data;
+
+  return questionData;
+};
+
+export const editQuestion = async (id: string, values: Partial<ApiModifyQuestion>) => {
+  const response = await axios.patch(`/api/questions/${id}`, values);
+  const questionData = response.data.data;
+
+  return questionData;
+};
+
+export const deleteQuestion = async (id: string) => {
+  const response = await axios.delete(`/api/questions/${id}`);
   const questionData = response.data.data;
 
   return questionData;

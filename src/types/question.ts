@@ -16,3 +16,9 @@ export interface Answer {
   isCorrect: boolean;
   user: UserInfo;
 }
+
+export interface ApiModifyQuestion {
+  title: string;
+  description: string;
+  attachedCode: string;
+}
