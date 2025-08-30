@@ -9,6 +9,7 @@ import { Questions } from '../pages/Questions';
 import { QuestionDetails } from '../pages/QuestionDetails';
 import { PageNotFound } from '../pages/NotFoundError';
 import { ErrorBoundary } from '../components/ErrorBoundary';
+import { MyAccount } from '../pages/MyAccount';
 
 const routes = [
   {
@@ -42,6 +43,10 @@ const routes = [
   {
     path: '/questions/:id',
     element: <QuestionDetails />,
+  },
+  {
+    path: '/account',
+    element: <MyAccount />,
   },
   {
     path: '*',
