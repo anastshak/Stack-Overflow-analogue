@@ -1,51 +1,38 @@
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Form, Input, message } from 'antd';
-import { createQuestion } from '../api/questions';
-import { queryClient } from '../utils/queryClient';
+import { Button, Form, Input } from 'antd';
 import { QuestionFormData, questionSchema } from '../utils/validationQuestionSchema';
-import { useMutation } from '@tanstack/react-query';
-import { Loader } from './Loader';
+import { DeleteTwoTone } from '@ant-design/icons';
 
 interface QuestionFormProps {
-  onSuccess?: () => void;
+  mode: 'create' | 'edit';
+  initialValues?: QuestionFormData;
+  onSubmit: (values: QuestionFormData) => void;
+  loading?: boolean;
+  deleteLoading?: boolean;
+  handleDeleteQuestion?: () => void;
 }
 
-export const QuestionForm = ({ onSuccess }: QuestionFormProps) => {
+export const QuestionForm = ({
+  mode,
+  initialValues,
+  onSubmit,
+  loading,
+  deleteLoading,
+  handleDeleteQuestion,
+}: QuestionFormProps) => {
   const {
     control,
     handleSubmit,
-    reset,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<QuestionFormData>({
     resolver: zodResolver(questionSchema),
-    defaultValues: {
+    defaultValues: initialValues || {
       title: '',
       description: '',
       attachedCode: '',
     },
   });
-
-  const mutation = useMutation({
-    mutationFn: (values: QuestionFormData) => createQuestion(values.title, values.description, values.attachedCode),
-    onSuccess: () => {
-      message.success('Question posted successfully');
-      queryClient.invalidateQueries({ queryKey: ['questions'] });
-      reset();
-      if (onSuccess) onSuccess();
-    },
-    onError: () => {
-      message.error('Failed to post question');
-    },
-  });
-
-  if (mutation.status === 'pending') {
-    return <Loader />;
-  }
-
-  const onSubmit = async (values: QuestionFormData) => {
-    mutation.mutate(values);
-  };
 
   return (
     <Form layout="vertical" onFinish={handleSubmit(onSubmit)}>
@@ -81,9 +68,16 @@ export const QuestionForm = ({ onSuccess }: QuestionFormProps) => {
         />
       </Form.Item>
 
-      <Button type="primary" htmlType="submit" loading={isSubmitting} block>
-        Ask question
-      </Button>
+      <div className="flex gap-1">
+        <Button type="primary" htmlType="submit" loading={loading} block>
+          {mode === 'create' ? 'Ask question' : 'Save changes'}
+        </Button>
+        {mode === 'edit' && (
+          <Button color="danger" variant="solid" loading={deleteLoading} onClick={handleDeleteQuestion} block>
+            <DeleteTwoTone twoToneColor={'white'} /> Delete question
+          </Button>
+        )}
+      </div>
     </Form>
   );
 };
