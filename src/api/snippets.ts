@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CommentInfo, Snippet, SnippetModel } from '../types/snippet';
+import { ApiModifySnippet, CommentInfo, Snippet, SnippetModel } from '../types/snippet';
 import { ApiSnippetsResponse } from '../types/api';
 import { mapSnippet } from '../utils/mapSnippet';
 
@@ -29,8 +29,22 @@ export const getLanguages = async (): Promise<string[]> => {
   return languagesData;
 };
 
-export const createSnippet = async (language: string, code: string) => {
-  const response = await axios.post(`/api/snippets`, { language, code }, { withCredentials: true });
+export const createSnippet = async (values: ApiModifySnippet) => {
+  const response = await axios.post(`/api/snippets`, values, { withCredentials: true });
+  const snippetData = response.data.data;
+
+  return snippetData;
+};
+
+export const editSnippet = async (id: string, values: Partial<ApiModifySnippet>) => {
+  const response = await axios.patch(`/api/snippets/${id}`, values, { withCredentials: true });
+  const snippetData = response.data.data;
+
+  return snippetData;
+};
+
+export const deleteSnippet = async (id: string) => {
+  const response = await axios.delete(`/api/snippets/${id}`, { withCredentials: true });
   const snippetData = response.data.data;
 
   return snippetData;

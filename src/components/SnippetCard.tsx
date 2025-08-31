@@ -1,11 +1,13 @@
-import React from 'react';
-import { Card } from 'antd';
-import { CodeOutlined, CommentOutlined, UserOutlined } from '@ant-design/icons';
+import React, { useState } from 'react';
+import { Button, Card } from 'antd';
+import { CodeOutlined, CommentOutlined, EditTwoTone, UserOutlined } from '@ant-design/icons';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { duotoneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { SnippetModel } from '../types/snippet';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { MarksSnap } from './Marks';
+import { useAuthStore } from '../store/authStore';
+import { EditSnippetModal } from './EditSnippetModal';
 
 interface SnippetCardProps {
   snippet: SnippetModel;
@@ -13,6 +15,11 @@ interface SnippetCardProps {
 
 export const SnippetCard = ({ snippet }: SnippetCardProps) => {
   const navigate = useNavigate();
+
+  const { user } = useAuthStore();
+  const isOwner = user?.username === snippet.creator;
+
+  const [modalOpen, setModalOpen] = useState(false);
 
   const location = useLocation();
   const hoverComments = location.pathname === '/' ? 'hover:cursor-pointer' : '';
@@ -22,13 +29,36 @@ export const SnippetCard = ({ snippet }: SnippetCardProps) => {
     navigate(`/posts/${snippet.id}`);
   };
 
+  const handleEditSnippet = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setModalOpen(false);
+  };
+
   return (
     <div className="mb-4">
       <Card className={'shadow-md rounded-lg'}>
         <div className="flex justify-between items-center mb-2 text-gray-500">
-          <span className="font-medium">
-            <UserOutlined /> {snippet.creator}
-          </span>
+          <div>
+            <span className="font-medium mr-2.5">
+              <UserOutlined /> {snippet.creator}
+            </span>
+            {isOwner && (
+              <Button
+                color="lime"
+                variant="solid"
+                size="small"
+                onClick={handleEditSnippet}
+                icon={<EditTwoTone twoToneColor="white" />}
+                className="text-sm"
+              >
+                Edit
+              </Button>
+            )}
+          </div>
           <span className="text-sm">
             <CodeOutlined className="mr-1" />
             {snippet.language}
@@ -48,6 +78,8 @@ export const SnippetCard = ({ snippet }: SnippetCardProps) => {
           </span>
         </div>
       </Card>
+
+      <EditSnippetModal open={modalOpen} onClose={handleModalClose} snippet={snippet} />
     </div>
   );
 };

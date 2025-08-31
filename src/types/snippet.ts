@@ -32,3 +32,8 @@ export interface SnippetModel {
   commentsCount: number;
   userMark?: 'like' | 'dislike' | null;
 }
+
+export interface ApiModifySnippet {
+  language: string;
+  code: string;
+}
