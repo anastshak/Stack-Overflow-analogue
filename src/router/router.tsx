@@ -11,6 +11,7 @@ import { PageNotFound } from '../pages/NotFoundError';
 import { ErrorBoundary } from '../components/ErrorBoundary';
 import { MyAccount } from '../pages/MyAccount';
 import { PostSnippet } from '../pages/PostSnippet';
+import { MySnippets } from '../pages/MySnippets';
 
 const routes = [
   {
@@ -52,6 +53,10 @@ const routes = [
   {
     path: '/post',
     element: <PostSnippet />,
+  },
+  {
+    path: '/mysnippets',
+    element: <MySnippets />,
   },
   {
     path: '*',

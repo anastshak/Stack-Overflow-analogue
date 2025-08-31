@@ -15,6 +15,19 @@ export const getSnippets = async (
   return { snippets: snippetsUpdated, meta: serverData.meta };
 };
 
+export const getSnippetsByUserID = async (
+  userId: string,
+  page: number,
+  limit: number = 5,
+): Promise<{ snippets: ApiSnippetsResponse['data']; meta: ApiSnippetsResponse['meta'] }> => {
+  const response = await axios.get(`/api/snippets`, { params: { userId, page, limit } });
+  const serverData = response.data.data;
+
+  const snippetsUpdated: SnippetModel[] = serverData.data.map((elem: Snippet) => mapSnippet(elem));
+
+  return { snippets: snippetsUpdated, meta: serverData.meta };
+};
+
 export const getSnippetById = async (id: string): Promise<{ snippet: SnippetModel; comments: CommentInfo[] }> => {
   const response = await axios.get(`/api/snippets/${id}`);
   const snippetData = response.data.data;
