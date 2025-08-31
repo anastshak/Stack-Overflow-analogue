@@ -10,6 +10,7 @@ import { QuestionDetails } from '../pages/QuestionDetails';
 import { PageNotFound } from '../pages/NotFoundError';
 import { ErrorBoundary } from '../components/ErrorBoundary';
 import { MyAccount } from '../pages/MyAccount';
+import { PostSnippet } from '../pages/PostSnippet';
 
 const routes = [
   {
@@ -47,6 +48,10 @@ const routes = [
   {
     path: '/account',
     element: <MyAccount />,
+  },
+  {
+    path: '/post',
+    element: <PostSnippet />,
   },
   {
     path: '*',

@@ -21,3 +21,17 @@ export const getSnippetById = async (id: string): Promise<{ snippet: SnippetMode
 
   return { snippet: mapSnippet(snippetData), comments: snippetData.comments };
 };
+
+export const getLanguages = async (): Promise<string[]> => {
+  const response = await axios.get(`/api/snippets/languages`);
+  const languagesData = response.data.data;
+
+  return languagesData;
+};
+
+export const createSnippet = async (language: string, code: string) => {
+  const response = await axios.post(`/api/snippets`, { language, code }, { withCredentials: true });
+  const snippetData = response.data.data;
+
+  return snippetData;
+};
