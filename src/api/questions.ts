@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { api } from './api';
 import { ApiQuestionsResponse } from '../types/api';
 import { ApiModifyQuestion, Question } from '../types/question';
 
@@ -6,34 +6,27 @@ export const getQuestions = async (
   page: number,
   limit: number = 5,
 ): Promise<{ questions: ApiQuestionsResponse['data']; meta: ApiQuestionsResponse['meta'] }> => {
-  const response = await axios.get(`/api/questions?sortBy=id:DESC`, { params: { page, limit } });
+  const response = await api.get('/questions?sortBy=id:DESC', { params: { page, limit } });
   const serverData = response.data.data;
-
   return { questions: serverData.data, meta: serverData.meta };
 };
 
 export const getQuestionById = async (id: string): Promise<Question> => {
-  const response = await axios.get(`/api/questions/${id}`);
+  const response = await api.get(`/questions/${id}`);
   return response.data.data;
 };
 
 export const createQuestion = async (values: ApiModifyQuestion) => {
-  const response = await axios.post(`/api/questions/`, values);
-  const questionData = response.data.data;
-
-  return questionData;
+  const response = await api.post('/questions', values);
+  return response.data.data;
 };
 
 export const editQuestion = async (id: string, values: Partial<ApiModifyQuestion>) => {
-  const response = await axios.patch(`/api/questions/${id}`, values);
-  const questionData = response.data.data;
-
-  return questionData;
+  const response = await api.patch(`/questions/${id}`, values);
+  return response.data.data;
 };
 
 export const deleteQuestion = async (id: string) => {
-  const response = await axios.delete(`/api/questions/${id}`);
-  const questionData = response.data.data;
-
-  return questionData;
+  const response = await api.delete(`/questions/${id}`);
+  return response.data.data;
 };

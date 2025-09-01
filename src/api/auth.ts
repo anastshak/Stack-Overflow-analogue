@@ -1,34 +1,31 @@
-import axios from 'axios';
+// api/auth.ts
+import { api } from './api';
 import { UpdatedUser, UserInfo } from '../types/user';
 
 export const registerUser = async (username: string, password: string): Promise<UserInfo> => {
-  const response = await axios.post('/api/register', { username, password }, { withCredentials: true });
-  const userData = response.data.data;
-  return userData;
+  const response = await api.post('/register', { username, password });
+  return response.data.data;
 };
 
 export const loginUser = async (username: string, password: string): Promise<UserInfo> => {
-  const response = await axios.post('/api/auth/login', { username, password }, { withCredentials: true });
-  const userData = response.data.data;
-  return userData;
+  const response = await api.post('/auth/login', { username, password });
+  return response.data.data;
 };
 
 export const logoutUser = async (): Promise<void> => {
-  await axios.post('/api/auth/logout', { withCredentials: true });
+  await api.post('/auth/logout');
 };
 
 export const updateUsername = async (newUsername: string): Promise<UpdatedUser> => {
-  const response = await axios.patch(`/api/me`, { username: newUsername }, { withCredentials: true });
-  const userData = response.data.data;
-  return userData;
+  const response = await api.patch('/me', { username: newUsername });
+  return response.data.data;
 };
 
 export const updatePassword = async (oldPassword: string, newPassword: string) => {
-  const response = await axios.patch(`/api/me/password`, { oldPassword, newPassword }, { withCredentials: true });
-  const userData = response.data.data;
-  return userData;
+  const response = await api.patch('/me/password', { oldPassword, newPassword });
+  return response.data.data;
 };
 
 export const deleteAccount = async (): Promise<void> => {
-  await axios.delete('/api/me', { withCredentials: true });
+  await api.delete('/me');
 };
