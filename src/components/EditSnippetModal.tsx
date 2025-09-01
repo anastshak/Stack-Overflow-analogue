@@ -43,7 +43,21 @@ export const EditSnippetModal = ({ open, onClose, snippet }: EditSnippetModalPro
   });
 
   return (
-    <Modal title="Edit snippet" open={open} onCancel={onClose} footer={null} destroyOnHidden width={700}>
+    <Modal
+      title="Edit snippet"
+      open={open}
+      onCancel={onClose}
+      footer={null}
+      destroyOnHidden
+      width={{
+        xs: '90%',
+        sm: '80%',
+        md: '70%',
+        lg: '60%',
+        xl: '45%',
+        xxl: '30%',
+      }}
+    >
       <PostSnippetForm
         mode="edit"
         initialValues={{

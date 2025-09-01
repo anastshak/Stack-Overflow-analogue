@@ -43,7 +43,21 @@ export const EditQuestionModal = ({ open, onClose, question }: EditQuestionModal
   });
 
   return (
-    <Modal title="Edit question" open={open} onCancel={onClose} footer={null} destroyOnHidden width={700}>
+    <Modal
+      title="Edit question"
+      open={open}
+      onCancel={onClose}
+      footer={null}
+      destroyOnHidden
+      width={{
+        xs: '90%',
+        sm: '80%',
+        md: '70%',
+        lg: '60%',
+        xl: '45%',
+        xxl: '30%',
+      }}
+    >
       <QuestionForm
         mode="edit"
         initialValues={{
