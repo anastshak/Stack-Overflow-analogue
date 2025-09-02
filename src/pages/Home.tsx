@@ -1,8 +1,8 @@
-import { Layout } from '../components/Layout';
-import { Logo } from '../components/Logo';
-import { SnippetsList } from '../components/SnippetsList';
+import { Layout } from '@shared/layouts/Layout';
+import { Logo } from '@shared/ui/Logo';
+import { SnippetsList } from '@modules/snippets';
 
-export const Home = () => {
+const Home = () => {
   return (
     <Layout>
       <h1 className="text-2xl my-5 font-bold font-mono flex flex-col items-center">
@@ -12,3 +12,5 @@ export const Home = () => {
     </Layout>
   );
 };
+
+export default Home;

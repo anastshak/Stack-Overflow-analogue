@@ -1,10 +1,12 @@
-import { Layout } from '../components/Layout';
-import { UsersList } from '../components/UsersList';
+import { Layout } from '@shared/layouts/Layout';
+import { UsersList } from '@modules/users';
 
-export const Users = () => {
+const Users = () => {
   return (
     <Layout>
       <UsersList />
     </Layout>
   );
 };
+
+export default Users;

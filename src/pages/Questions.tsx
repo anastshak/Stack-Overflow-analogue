@@ -1,10 +1,12 @@
-import { Layout } from '../components/Layout';
-import { QuestionsList } from '../components/QuestionsList';
+import { Layout } from '@shared/layouts/Layout';
+import { QuestionsList } from '@modules/questions';
 
-export const Questions = () => {
+const Questions = () => {
   return (
     <Layout>
       <QuestionsList />
     </Layout>
   );
 };
+
+export default Questions;

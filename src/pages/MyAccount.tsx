@@ -1,8 +1,8 @@
-import { AccountActions } from '../components/AccountActions';
-import { Layout } from '../components/Layout';
-import { UserCardDetails } from '../components/UserCardDetails';
+import { Layout } from '@shared/layouts/Layout';
+import { UserCardDetails } from '@modules/users';
+import { AccountActions } from '@modules/account';
 
-export const MyAccount = () => {
+const MyAccount = () => {
   return (
     <Layout>
       <h1 className="text-center font-bold text-2xl">My profile</h1>
@@ -11,3 +11,5 @@ export const MyAccount = () => {
     </Layout>
   );
 };
+
+export default MyAccount;

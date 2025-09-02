@@ -1,10 +1,12 @@
-import { Layout } from '../components/Layout';
-import { RegisterForm } from '../components/RegisterForm';
+import { Layout } from '@shared/layouts/Layout';
+import { RegisterForm } from '@modules/auth';
 
-export const Register = () => {
+const Register = () => {
   return (
     <Layout>
       <RegisterForm />
     </Layout>
   );
 };
+
+export default Register;

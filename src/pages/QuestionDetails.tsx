@@ -1,10 +1,12 @@
-import { Layout } from '../components/Layout';
-import { QuestionCardDetails } from '../components/QuestionCardDetails';
+import { Layout } from '@shared/layouts/Layout';
+import { QuestionCardDetails } from '@modules/questions';
 
-export const QuestionDetails = () => {
+const QuestionDetails = () => {
   return (
     <Layout>
       <QuestionCardDetails />
     </Layout>
   );
 };
+
+export default QuestionDetails;

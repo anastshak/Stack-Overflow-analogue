@@ -1,7 +1,7 @@
-import { Layout } from '../components/Layout';
-import { MySnippetsList } from '../components/MySnippetsList';
+import { Layout } from '@shared/layouts/Layout';
+import { MySnippetsList } from '@modules/snippets';
 
-export const MySnippets = () => {
+const MySnippets = () => {
   return (
     <Layout>
       <h1 className="text-center font-bold text-2xl mb-4">My code snippets</h1>
@@ -9,3 +9,5 @@ export const MySnippets = () => {
     </Layout>
   );
 };
+
+export default MySnippets;

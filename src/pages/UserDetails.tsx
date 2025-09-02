@@ -1,10 +1,12 @@
-import { Layout } from '../components/Layout';
-import { UserCardDetails } from '../components/UserCardDetails';
+import { Layout } from '@shared/layouts/Layout';
+import { UserCardDetails } from '@modules/users';
 
-export const UserDetails = () => {
+const UserDetails = () => {
   return (
     <Layout>
       <UserCardDetails />
     </Layout>
   );
 };
+
+export default UserDetails;

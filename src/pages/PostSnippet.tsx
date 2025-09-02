@@ -1,7 +1,7 @@
-import { CreateSnippetCard } from '../components/CreateSnippetCard';
-import { Layout } from '../components/Layout';
+import { Layout } from '@shared/layouts/Layout';
+import { CreateSnippetCard } from '@modules/snippets';
 
-export const PostSnippet = () => {
+const PostSnippet = () => {
   return (
     <Layout>
       <div className="mt-[5%]">
@@ -11,3 +11,5 @@ export const PostSnippet = () => {
     </Layout>
   );
 };
+
+export default PostSnippet;

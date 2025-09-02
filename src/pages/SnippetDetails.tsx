@@ -1,10 +1,12 @@
-import { SnippetCardDetails } from '../components/SnippetCardDetails';
-import { Layout } from '../components/Layout';
+import { Layout } from '@shared/layouts/Layout';
+import { SnippetCardDetails } from '@modules/snippets';
 
-export const SnippetDetails = () => {
+const SnippetDetails = () => {
   return (
     <Layout>
       <SnippetCardDetails />
     </Layout>
   );
 };
+
+export default SnippetDetails;
