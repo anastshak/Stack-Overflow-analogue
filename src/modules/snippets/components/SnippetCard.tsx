@@ -22,7 +22,7 @@ export const SnippetCard = ({ snippet }: SnippetCardProps) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const location = useLocation();
-  const hoverComments = location.pathname === '/' ? 'hover:cursor-pointer' : '';
+  const hoverComments = location.pathname === '/' || location.pathname === '/mysnippets' ? 'hover:cursor-pointer' : '';
 
   const handleCommentsClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -73,7 +73,10 @@ export const SnippetCard = ({ snippet }: SnippetCardProps) => {
           {/* marks */}
           <MarksSnap snippet={snippet} />
           {/* comments */}
-          <span onClick={location.pathname === '/' ? handleCommentsClick : undefined} className={hoverComments}>
+          <span
+            onClick={location.pathname === '/' || location.pathname === '/mysnippets' ? handleCommentsClick : undefined}
+            className={hoverComments}
+          >
             <CommentOutlined className="mr-1" /> {snippet.commentsCount}
           </span>
         </div>
