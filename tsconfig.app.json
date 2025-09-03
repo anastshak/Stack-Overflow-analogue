@@ -30,5 +30,5 @@
       "@shared/*": ["shared/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "jest.config.ts"]
 }
