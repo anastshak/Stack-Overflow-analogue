@@ -8,10 +8,11 @@ import { CommentForm } from '../components/CommentForm';
 import { CommentInfo } from '../types';
 import { useAuthStore } from '@shared/store/authStore';
 import { Loader } from '@shared/ui/Loader';
+import { useEffect, useState } from 'react';
+import { socket } from '@shared/api/socket';
 
 export const SnippetCardDetails = () => {
   const { isAuthenticated } = useAuthStore();
-
   const { id } = useParams<{ id: string }>();
 
   const { data, isLoading, isError, error } = useQuery({
@@ -19,6 +20,29 @@ export const SnippetCardDetails = () => {
     queryFn: () => getSnippetById(id!),
     enabled: !!id,
   });
+
+  const [comments, setComments] = useState<CommentInfo[]>([]);
+
+  useEffect(() => {
+    if (data?.comments) {
+      setComments(data.comments);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (!id) return;
+
+    socket.emit('joinPost', id);
+
+    socket.on('comment:new', (newComment: CommentInfo) => {
+      setComments((prev) => [...prev, newComment]);
+    });
+
+    return () => {
+      socket.emit('leavePost', id);
+      socket.off('comment:new');
+    };
+  }, [id]);
 
   if (isLoading) {
     return <Loader />;
@@ -36,11 +60,11 @@ export const SnippetCardDetails = () => {
     <div className="p-6">
       <SnippetCard snippet={data.snippet} />
 
-      {data.comments.length > 0 ? (
+      {comments.length > 0 ? (
         <>
           <h2 className="text-lg font-bold mt-6 mb-3">Comments</h2>
           <div className="flex flex-col gap-3">
-            {data.comments.map((comment: CommentInfo) => (
+            {comments.map((comment: CommentInfo) => (
               <CommentCard key={comment.id} comment={{ ...comment, ...{ username: comment.user.username } }} />
             ))}
           </div>
