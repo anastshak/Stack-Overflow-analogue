@@ -5,13 +5,13 @@ export const getQuestions = async (
   page: number,
   limit: number = 5,
 ): Promise<{ questions: ApiQuestionsResponse['data']; meta: ApiQuestionsResponse['meta'] }> => {
-  const response = await api.get('/questions?sortBy=id:DESC', { params: { page, limit } });
+  const response = await api.get('/questions?sortBy=id:DESC', { params: { page, limit }, withCredentials: false });
   const serverData = response.data.data;
   return { questions: serverData.data, meta: serverData.meta };
 };
 
 export const getQuestionById = async (id: string): Promise<Question> => {
-  const response = await api.get(`/questions/${id}`);
+  const response = await api.get(`/questions/${id}`, { withCredentials: false });
   return response.data.data;
 };
 

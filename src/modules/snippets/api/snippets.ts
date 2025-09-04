@@ -6,7 +6,7 @@ export const getSnippets = async (
   page: number,
   limit: number = 5,
 ): Promise<{ snippets: ApiSnippetsResponse['data']; meta: ApiSnippetsResponse['meta'] }> => {
-  const response = await api.get('/snippets', { params: { page, limit } });
+  const response = await api.get('/snippets', { params: { page, limit }, withCredentials: false });
   const serverData = response.data.data;
 
   const snippetsUpdated: SnippetModel[] = serverData.data.map((elem: Snippet) => mapSnippet(elem));
@@ -26,14 +26,14 @@ export const getSnippetsByUserID = async (
 };
 
 export const getSnippetById = async (id: string): Promise<{ snippet: SnippetModel; comments: CommentInfo[] }> => {
-  const response = await api.get(`/snippets/${id}`);
+  const response = await api.get(`/snippets/${id}`, { withCredentials: false });
   const snippetData = response.data.data;
 
   return { snippet: mapSnippet(snippetData), comments: snippetData.comments };
 };
 
 export const getLanguages = async (): Promise<string[]> => {
-  const response = await api.get('/snippets/languages');
+  const response = await api.get('/snippets/languages', { withCredentials: false });
   return response.data.data;
 };
 
