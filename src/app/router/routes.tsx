@@ -1,52 +1,65 @@
-import { lazy } from 'react';
+import {
+  Home,
+  Login,
+  MyAccount,
+  MySnippets,
+  NotFoundError,
+  Posts,
+  PostSnippet,
+  QuestionDetails,
+  Questions,
+  Register,
+  UserDetails,
+  Users,
+} from '@shared/constants/links';
 
 export const routes = [
   {
     path: '/',
-    element: lazy(() => import('@pages/Home')),
+    element: Home,
   },
   {
     path: '/posts/:id',
-    element: lazy(() => import('@pages/SnippetDetails')),
+    element: Posts,
   },
   {
     path: '/signup',
-    element: lazy(() => import('@pages/Register')),
+    element: Register,
   },
   {
     path: '/login',
-    element: lazy(() => import('@pages/Login')),
+    element: Login,
   },
   {
     path: '/users',
-    element: lazy(() => import('@pages/Users')),
+    element: Users,
   },
   {
     path: '/users/:id',
-    element: lazy(() => import('@pages/UserDetails')),
+    element: UserDetails,
   },
   {
     path: '/questions',
-    element: lazy(() => import('@pages/Questions')),
+    element: Questions,
   },
   {
     path: '/questions/:id',
-    element: lazy(() => import('@pages/QuestionDetails')),
+    element: QuestionDetails,
   },
   {
     path: '/account',
-    element: lazy(() => import('@pages/MyAccount')),
+    element: MyAccount,
   },
   {
     path: '/post',
-    element: lazy(() => import('@pages/PostSnippet')),
+    element: PostSnippet,
   },
   {
     path: '/mysnippets',
-    element: lazy(() => import('@pages/MySnippets')),
+    element: MySnippets,
   },
   {
     path: '*',
-    element: lazy(() => import('@pages/NotFoundError')),
+    element: NotFoundError,
   },
 ];
