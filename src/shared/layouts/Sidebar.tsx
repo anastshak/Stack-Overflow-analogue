@@ -11,14 +11,15 @@ import {
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
 import { useState } from 'react';
+import { ROUTES } from '@shared/constants/menuRoutes';
 
 const menuItemsConfig = [
-  { key: 'home', label: 'Home', icon: <HomeOutlined />, address: '/' },
-  { key: 'account', label: 'My Account', icon: <UserOutlined />, address: '/account', authOnly: true },
-  { key: 'post', label: 'Post Snippet', icon: <FileTextOutlined />, address: '/post', authOnly: true },
-  { key: 'snippets', label: 'My Snippets', icon: <FileTextOutlined />, address: '/mysnippets', authOnly: true },
-  { key: 'questions', label: 'Questions', icon: <QuestionCircleOutlined />, address: '/questions' },
-  { key: 'users', label: 'Users', icon: <TeamOutlined />, address: '/users' },
+  { key: 'home', label: 'Home', icon: <HomeOutlined />, address: ROUTES.HOME },
+  { key: 'account', label: 'My Account', icon: <UserOutlined />, address: ROUTES.ACCOUNT, authOnly: true },
+  { key: 'post', label: 'Post Snippet', icon: <FileTextOutlined />, address: ROUTES.POST_SNIPPET, authOnly: true },
+  { key: 'snippets', label: 'My Snippets', icon: <FileTextOutlined />, address: ROUTES.MY_SNIPPETS, authOnly: true },
+  { key: 'questions', label: 'Questions', icon: <QuestionCircleOutlined />, address: ROUTES.QUESTIONS },
+  { key: 'users', label: 'Users', icon: <TeamOutlined />, address: ROUTES.USERS },
 ];
 
 export const Sidebar = () => {

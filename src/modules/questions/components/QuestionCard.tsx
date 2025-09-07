@@ -16,18 +16,20 @@ interface QuestionCardProps {
 
 export const QuestionCard = ({ question, isFullVersion = false }: QuestionCardProps) => {
   const { user } = useAuthStore();
-  const isOwner = user?.id === question.user.id;
+  const { id, title, description, attachedCode, isResolved, user: questionUser } = question;
+
+  const isOwner = user?.id === questionUser.id;
 
   const [modalOpen, setModalOpen] = useState(false);
 
   const navigate = useNavigate();
 
   const handleQuestionClick = () => {
-    navigate(`/questions/${question.id}`);
+    navigate(`/questions/${id}`);
   };
 
-  const handleEditQuestion = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const handleEditQuestion = (event: React.MouseEvent) => {
+    event.stopPropagation();
     setModalOpen(true);
   };
 
@@ -50,11 +52,11 @@ export const QuestionCard = ({ question, isFullVersion = false }: QuestionCardPr
           <Avatar size={48} icon={<QuestionCircleOutlined />} />
           <div className="flex-1 flex items-center justify-between">
             <div>
-              <h3 className="font-semibold text-lg">{question.title}</h3>
-              <p className="text-xs text-gray-500">asked by user: {question.user.username}</p>
+              <h3 className="font-semibold text-lg">{title}</h3>
+              <p className="text-xs text-gray-500">asked by user: {questionUser.username}</p>
             </div>
             <span className="text-3xl flex flex-col md:flex-row items-center justify-center gap-1">
-              {question.isResolved ? <CheckCircleTwoTone twoToneColor="#52c41a" /> : <ClockCircleTwoTone />}
+              {isResolved ? <CheckCircleTwoTone twoToneColor="#52c41a" /> : <ClockCircleTwoTone />}
               {isOwner && (
                 <Button
                   type="primary"
@@ -75,7 +77,7 @@ export const QuestionCard = ({ question, isFullVersion = false }: QuestionCardPr
               'max-h-32 overflow-y-auto py-3.5 px-3.5 line-clamp-none': isFullVersion,
             })}
           >
-            {question.description}
+            {description}
           </p>
         </div>
 
@@ -84,7 +86,7 @@ export const QuestionCard = ({ question, isFullVersion = false }: QuestionCardPr
           <div className="my-4">
             <h5 className="text-gray-600">code snippet</h5>
             <SyntaxHighlighter style={duotoneDark} customStyle={customStyle}>
-              {question.attachedCode}
+              {attachedCode}
             </SyntaxHighlighter>
           </div>
         )}

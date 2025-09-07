@@ -24,13 +24,13 @@ export const SnippetCard = ({ snippet }: SnippetCardProps) => {
   const location = useLocation();
   const hoverComments = location.pathname === '/' || location.pathname === '/mysnippets' ? 'hover:cursor-pointer' : '';
 
-  const handleCommentsClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const handleCommentsClick = (event: React.MouseEvent) => {
+    event.stopPropagation();
     navigate(`/posts/${snippet.id}`);
   };
 
-  const handleEditSnippet = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const handleEditSnippet = (event: React.MouseEvent) => {
+    event.stopPropagation();
     setModalOpen(true);
   };
 

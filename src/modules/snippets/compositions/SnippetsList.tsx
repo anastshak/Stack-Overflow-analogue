@@ -27,6 +27,10 @@ export const SnippetsList = () => {
     return <Empty description="No posts found" />;
   }
 
+  const handlePageChange = (newPage: number) => {
+    setSearchParams({ page: newPage.toString() });
+  };
+
   return (
     <List
       itemLayout="vertical"
@@ -35,7 +39,7 @@ export const SnippetsList = () => {
         current: page,
         pageSize: data?.meta.itemsPerPage || 5,
         total: data?.meta.totalItems || 0,
-        onChange: (p) => setSearchParams({ page: p.toString() }),
+        onChange: handlePageChange,
         showSizeChanger: false,
       }}
       dataSource={data?.snippets || []}

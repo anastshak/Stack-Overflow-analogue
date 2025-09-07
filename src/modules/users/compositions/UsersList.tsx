@@ -31,46 +31,56 @@ export const UsersList = () => {
     throw error;
   }
 
+  if (isLoading) {
+    return (
+      <div className="container mx-auto px-4 py-6">
+        <SearchBar initialValue={search} onSearch={handleSearch} loading={isLoading} />
+        <Loader />
+      </div>
+    );
+  }
+
+  if (!data?.users?.length) {
+    return (
+      <div className="container mx-auto px-4 py-6">
+        <SearchBar initialValue={search} onSearch={handleSearch} loading={isLoading} />
+        <Empty description="No users found" />
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto px-4 py-6">
       <SearchBar initialValue={search} onSearch={handleSearch} loading={isLoading} />
 
-      {isLoading ? (
-        <Loader />
-      ) : data?.users?.length ? (
-        <>
-          <List
-            grid={{
-              gutter: 16,
-              xs: 1,
-              sm: 1,
-              md: 2,
-              lg: 3,
-              xl: 4,
-              xxl: 6,
-            }}
-            dataSource={data.users}
-            renderItem={(user: UserInfo) => (
-              <List.Item key={user.id}>
-                <UserCard user={user} />
-              </List.Item>
-            )}
-          />
+      <List
+        grid={{
+          gutter: 16,
+          xs: 1,
+          sm: 2,
+          md: 2,
+          lg: 3,
+          xl: 4,
+          xxl: 6,
+        }}
+        dataSource={data.users}
+        renderItem={(user: UserInfo) => (
+          <List.Item key={user.id}>
+            <UserCard user={user} />
+          </List.Item>
+        )}
+      />
 
-          {data.meta?.totalPages > 1 && (
-            <div className="flex justify-end mt-6">
-              <Pagination
-                current={page}
-                total={data.meta.totalItems}
-                pageSize={data.meta.itemsPerPage}
-                onChange={(newPage) => setSearchParams(buildParams(newPage, search))}
-                showSizeChanger={false}
-              />
-            </div>
-          )}
-        </>
-      ) : (
-        <Empty description="No users found" />
+      {data.meta?.totalPages > 1 && (
+        <div className="flex justify-end mt-6">
+          <Pagination
+            current={page}
+            total={data.meta.totalItems}
+            pageSize={data.meta.itemsPerPage}
+            onChange={(newPage) => setSearchParams(buildParams(newPage, search))}
+            showSizeChanger={false}
+          />
+        </div>
       )}
     </div>
   );

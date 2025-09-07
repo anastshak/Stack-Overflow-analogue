@@ -4,7 +4,12 @@ import { MarkInfo, Snippet, SnippetModel } from '../types';
 export const mapSnippet = (snippet: Snippet): SnippetModel => {
   const { user } = useAuthStore.getState();
 
-  const userMark = user ? (snippet.marks.find((m: MarkInfo) => m.user.id === user.id)?.type ?? null) : null;
+  let userMark: SnippetModel['userMark'] = null;
+
+  if (user) {
+    const mark = snippet.marks.find((m: MarkInfo) => m.user.id === user.id);
+    userMark = mark ? mark.type : null;
+  }
 
   return {
     id: snippet.id,

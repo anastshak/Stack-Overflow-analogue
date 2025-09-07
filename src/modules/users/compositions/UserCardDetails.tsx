@@ -3,7 +3,7 @@ import { CodeOutlined, UserOutlined, StarOutlined } from '@ant-design/icons';
 import { useParams } from 'react-router-dom';
 import { getUserStatistic } from '../api';
 import { useQuery } from '@tanstack/react-query';
-import { formatNumber } from '../helpers/formatNumber';
+import { formatNumber } from '@shared/helpers/formatNumber';
 import { Loader } from '@shared/ui/Loader';
 import { useAuthStore } from '@shared/store/authStore';
 import { UserStatistics } from '../components/UserStatistics';
