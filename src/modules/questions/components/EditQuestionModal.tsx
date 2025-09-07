@@ -1,11 +1,7 @@
-import { message, Modal } from 'antd';
+import { Modal } from 'antd';
 import { QuestionForm } from './QuestionForm';
-import { useMutation } from '@tanstack/react-query';
-import { QuestionFormData } from '../helpers/validationQuestionSchema';
-import { deleteQuestion, editQuestion } from '../api';
-import { queryClient } from '@app/providers/queryClient';
 import { Question } from '../types';
-import { useNavigate } from 'react-router-dom';
+import { useQuestionActions } from '../hooks/useQuestionActions';
 
 interface EditQuestionModalProps {
   open: boolean;
@@ -14,33 +10,7 @@ interface EditQuestionModalProps {
 }
 
 export const EditQuestionModal = ({ open, onClose, question }: EditQuestionModalProps) => {
-  const navigate = useNavigate();
-
-  const editMutation = useMutation({
-    mutationFn: (values: QuestionFormData) => editQuestion(question.id, values),
-    onSuccess: () => {
-      message.success('Question updated successfully');
-      queryClient.invalidateQueries({ queryKey: ['questions'] });
-      queryClient.invalidateQueries({ queryKey: ['question', question.id] });
-      onClose();
-    },
-    onError: () => {
-      message.error('Failed to update question');
-    },
-  });
-
-  const deleteMutation = useMutation({
-    mutationFn: () => deleteQuestion(question.id),
-    onSuccess: () => {
-      message.success('Question deleted successfully');
-      queryClient.invalidateQueries({ queryKey: ['questions'] });
-      onClose();
-      navigate('/questions');
-    },
-    onError: () => {
-      message.error('Failed to delete question');
-    },
-  });
+  const { editMutation, deleteMutation } = useQuestionActions(question.id, onClose);
 
   return (
     <Modal
