@@ -1,9 +1,11 @@
-import { useAuthStore } from '@shared/store/authStore';
-import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { deleteAccount } from '../api';
+import { useMutation } from '@tanstack/react-query';
 import { message } from 'antd';
+
 import { logoutUser } from '@shared/api/logout';
+import { useAuthStore } from '@shared/store/authStore';
+
+import { deleteAccount } from '../api';
 
 export const useAuthActions = () => {
   const { clear } = useAuthStore();

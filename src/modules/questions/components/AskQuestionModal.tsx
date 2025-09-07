@@ -1,9 +1,11 @@
-import { message, Modal } from 'antd';
-import { QuestionForm } from './QuestionForm';
 import { useMutation } from '@tanstack/react-query';
-import { QuestionFormData } from '../helpers/validationQuestionSchema';
-import { createQuestion } from '../api';
+import { message, Modal } from 'antd';
+
 import { queryClient } from '@app/providers/queryClient';
+
+import { createQuestion } from '../api';
+import { QuestionFormData } from '../helpers/validationQuestionSchema';
+import { QuestionForm } from './QuestionForm';
 
 interface AskQuestionModalProps {
   open: boolean;

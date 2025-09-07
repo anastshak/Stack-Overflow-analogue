@@ -1,12 +1,14 @@
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Form, Input, Select } from 'antd';
-import { useQuery } from '@tanstack/react-query';
-import { snippetSchema, SnippetFormData } from '../helpers/validationSnippetSchema';
-import { getLanguages } from '../api/snippets';
-import { Loader } from '@shared/ui/Loader';
 import { DeleteTwoTone } from '@ant-design/icons';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useQuery } from '@tanstack/react-query';
+import { Button, Form, Input, Select } from 'antd';
+
 import { ControlledFormItem } from '@shared/ui/ControlledFormItem';
+import { Loader } from '@shared/ui/Loader';
+
+import { getLanguages } from '../api/snippets';
+import { SnippetFormData, snippetSchema } from '../helpers/validationSnippetSchema';
 
 interface PostSnippetFormProps {
   mode: 'create' | 'edit';

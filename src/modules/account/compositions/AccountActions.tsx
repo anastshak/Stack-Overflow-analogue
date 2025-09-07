@@ -1,7 +1,8 @@
+import { DeleteTwoTone, LogoutOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
+
 import { ChangePasswordForm } from '../components/ChangePasswordForm';
 import { ChangeUsernameForm } from '../components/ChangeUsernameForm';
-import { DeleteTwoTone, LogoutOutlined } from '@ant-design/icons';
 import { useAuthActions } from '../hooks/useAuthActions';
 
 export const AccountActions = () => {

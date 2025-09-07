@@ -1,14 +1,14 @@
-import { Card, Row, Col, Statistic } from 'antd';
 import {
+  CheckCircleOutlined,
   CodeOutlined,
   CommentOutlined,
-  LikeOutlined,
   DislikeOutlined,
-  QuestionCircleOutlined,
-  CheckCircleOutlined,
+  LikeOutlined,
   MessageOutlined,
+  QuestionCircleOutlined,
   SafetyOutlined,
 } from '@ant-design/icons';
+import { Card, Col, Row, Statistic } from 'antd';
 
 import { UserStatistic } from '../types';
 

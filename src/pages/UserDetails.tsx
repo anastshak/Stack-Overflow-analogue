@@ -1,5 +1,5 @@
-import { Layout } from '@shared/layouts/Layout';
 import { UserCardDetails } from '@modules/users';
+import { Layout } from '@shared/layouts/Layout';
 
 const UserDetails = () => {
   return (

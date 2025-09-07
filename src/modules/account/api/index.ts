@@ -1,6 +1,7 @@
 import { api } from '@shared/api/api';
-import { UpdatedUser } from '../types';
 import { API_ENDPOINTS } from '@shared/constants/endpoints';
+
+import { UpdatedUser } from '../types';
 
 export const updateUsername = async (newUsername: string): Promise<UpdatedUser> => {
   const response = await api.patch(API_ENDPOINTS.ACCOUNT.ME, { username: newUsername });

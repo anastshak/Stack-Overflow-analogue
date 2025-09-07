@@ -1,5 +1,5 @@
-import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 
 interface LogoProps {
   isDisplay?: boolean;

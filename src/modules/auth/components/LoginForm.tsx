@@ -1,14 +1,16 @@
 import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useNavigate, Link } from 'react-router-dom';
-import { Button, Card, Form, Input, message } from 'antd';
-import { loginSchema, LoginFormData } from '../helpers/validationLoginSchema';
-import { loginUser } from '../api';
-import axios from 'axios';
-import { useAuthStore } from '@shared/store/authStore';
 import { useMutation } from '@tanstack/react-query';
-import { Loader } from '@shared/ui/Loader';
+import { Button, Card, Form, Input, message } from 'antd';
+import axios from 'axios';
+
+import { useAuthStore } from '@shared/store/authStore';
 import { ControlledFormItem } from '@shared/ui/ControlledFormItem';
+import { Loader } from '@shared/ui/Loader';
+
+import { loginUser } from '../api';
+import { LoginFormData, loginSchema } from '../helpers/validationLoginSchema';
 
 export const LoginForm = () => {
   const navigate = useNavigate();

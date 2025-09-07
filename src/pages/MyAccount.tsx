@@ -1,6 +1,6 @@
-import { Layout } from '@shared/layouts/Layout';
-import { UserCardDetails } from '@modules/users';
 import { AccountActions } from '@modules/account';
+import { UserCardDetails } from '@modules/users';
+import { Layout } from '@shared/layouts/Layout';
 
 const MyAccount = () => {
   return (

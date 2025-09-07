@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { Button, Card } from 'antd';
-import { CodeOutlined, CommentOutlined, EditTwoTone, UserOutlined } from '@ant-design/icons';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { duotoneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { SnippetModel } from '../types';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { MarksSnap } from './Marks';
+import { CodeOutlined, CommentOutlined, EditTwoTone, UserOutlined } from '@ant-design/icons';
+import { Button, Card } from 'antd';
+
 import { useAuthStore } from '@shared/store/authStore';
+
+import { SnippetModel } from '../types';
 import { EditSnippetModal } from './EditSnippetModal';
+import { MarksSnap } from './Marks';
 
 interface SnippetCardProps {
   snippet: SnippetModel;

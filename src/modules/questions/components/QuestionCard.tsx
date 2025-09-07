@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { Card, Avatar, Button } from 'antd';
-import { CheckCircleTwoTone, ClockCircleTwoTone, EditTwoTone, QuestionCircleOutlined } from '@ant-design/icons';
-import { Question } from '../types';
 import { useNavigate } from 'react-router-dom';
-import cn from 'classnames';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { duotoneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { CheckCircleTwoTone, ClockCircleTwoTone, EditTwoTone, QuestionCircleOutlined } from '@ant-design/icons';
+import { Avatar, Button, Card } from 'antd';
+import cn from 'classnames';
+
 import { useAuthStore } from '@shared/store/authStore';
+
+import { Question } from '../types';
 import { EditQuestionModal } from './EditQuestionModal';
 
 interface QuestionCardProps {

@@ -1,11 +1,13 @@
-import { message, Modal } from 'antd';
-import { useMutation } from '@tanstack/react-query';
-import { queryClient } from '@app/providers/queryClient';
 import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
+import { message, Modal } from 'antd';
+
+import { queryClient } from '@app/providers/queryClient';
+
+import { deleteSnippet, editSnippet } from '../api/snippets';
+import { SnippetFormData } from '../helpers/validationSnippetSchema';
 import { SnippetModel } from '../types';
 import { PostSnippetForm } from './PostSnippetForm';
-import { SnippetFormData } from '../helpers/validationSnippetSchema';
-import { deleteSnippet, editSnippet } from '../api/snippets';
 
 interface EditSnippetModalProps {
   open: boolean;

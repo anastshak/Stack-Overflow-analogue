@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { Button, Input, message } from 'antd';
-import { useMutation } from '@tanstack/react-query';
-import { addComment } from '../api/comment';
-import { queryClient } from '@app/providers/queryClient';
 import { SendOutlined } from '@ant-design/icons';
+import { useMutation } from '@tanstack/react-query';
+import { Button, Input, message } from 'antd';
+
+import { queryClient } from '@app/providers/queryClient';
+
+import { addComment } from '../api/comment';
 
 interface CommentFormProps {
   snippetId: string;

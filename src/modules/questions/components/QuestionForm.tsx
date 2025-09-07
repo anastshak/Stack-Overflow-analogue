@@ -1,9 +1,11 @@
 import { useForm } from 'react-hook-form';
+import { DeleteTwoTone } from '@ant-design/icons';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Form, Input } from 'antd';
-import { QuestionFormData, questionSchema } from '../helpers/validationQuestionSchema';
-import { DeleteTwoTone } from '@ant-design/icons';
+
 import { ControlledFormItem } from '@shared/ui/ControlledFormItem';
+
+import { QuestionFormData, questionSchema } from '../helpers/validationQuestionSchema';
 
 interface QuestionFormProps {
   mode: 'create' | 'edit';

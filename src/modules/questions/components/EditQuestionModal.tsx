@@ -1,7 +1,8 @@
 import { Modal } from 'antd';
-import { QuestionForm } from './QuestionForm';
-import { Question } from '../types';
+
 import { useQuestionActions } from '../hooks/useQuestionActions';
+import { Question } from '../types';
+import { QuestionForm } from './QuestionForm';
 
 interface EditQuestionModalProps {
   open: boolean;

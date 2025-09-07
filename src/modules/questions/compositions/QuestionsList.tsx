@@ -1,9 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
-import { getQuestions } from '../api';
-import { Empty, List } from 'antd';
-import { QuestionCard } from '../components/QuestionCard';
 import { useSearchParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { Empty, List } from 'antd';
+
 import { Loader } from '@shared/ui/Loader';
+
+import { getQuestions } from '../api';
+import { QuestionCard } from '../components/QuestionCard';
 
 export const QuestionsList = () => {
   const [searchParams, setSearchParams] = useSearchParams();

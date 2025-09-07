@@ -1,4 +1,5 @@
 import { useAuthStore } from '@shared/store/authStore';
+
 import { MarkInfo, Snippet, SnippetModel } from '../types';
 
 export const mapSnippet = (snippet: Snippet): SnippetModel => {

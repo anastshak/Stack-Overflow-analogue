@@ -1,5 +1,5 @@
-import { Layout } from '@shared/layouts/Layout';
 import { LoginForm } from '@modules/auth';
+import { Layout } from '@shared/layouts/Layout';
 
 const Login = () => {
   return (

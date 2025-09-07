@@ -1,6 +1,6 @@
+import { SnippetsList } from '@modules/snippets';
 import { Layout } from '@shared/layouts/Layout';
 import { Logo } from '@shared/ui/Logo';
-import { SnippetsList } from '@modules/snippets';
 
 const Home = () => {
   return (

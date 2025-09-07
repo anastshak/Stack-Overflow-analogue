@@ -1,7 +1,8 @@
 import { api } from '@shared/api/api';
-import { ApiModifySnippet, ApiSnippetsResponse, CommentInfo, Snippet, SnippetModel } from '../types';
-import { mapSnippet } from '../helpers/mapSnippet';
 import { API_ENDPOINTS } from '@shared/constants/endpoints';
+
+import { mapSnippet } from '../helpers/mapSnippet';
+import { ApiModifySnippet, ApiSnippetsResponse, CommentInfo, Snippet, SnippetModel } from '../types';
 
 export const getSnippets = async (
   page: number,

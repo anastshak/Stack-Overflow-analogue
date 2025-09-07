@@ -1,7 +1,8 @@
+import { Suspense } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
+
 import { ErrorBoundary } from '../error/ErrorBoundary';
 import { routes } from './routes';
-import { Suspense } from 'react';
 
 export const router = createBrowserRouter(
   routes.map((route) => ({

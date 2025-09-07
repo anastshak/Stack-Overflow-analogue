@@ -1,17 +1,19 @@
-import { Menu } from 'antd';
+import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
-  HomeOutlined,
-  UserOutlined,
   FileTextOutlined,
+  HomeOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
   QuestionCircleOutlined,
   TeamOutlined,
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
+  UserOutlined,
 } from '@ant-design/icons';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useAuthStore } from '../store/authStore';
-import { useState } from 'react';
+import { Menu } from 'antd';
+
 import { ROUTES } from '@shared/constants/menuRoutes';
+
+import { useAuthStore } from '../store/authStore';
 
 const menuItemsConfig = [
   { key: 'home', label: 'Home', icon: <HomeOutlined />, address: ROUTES.HOME },

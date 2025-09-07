@@ -1,11 +1,13 @@
-import { useQuery } from '@tanstack/react-query';
-import { Empty, Pagination, List } from 'antd';
 import { useSearchParams } from 'react-router-dom';
-import { UserCard } from '../components/UserCard';
-import { SearchBar } from '../components/SearchBar';
-import { getUsers } from '../api';
-import { Loader } from '@shared/ui/Loader';
+import { useQuery } from '@tanstack/react-query';
+import { Empty, List, Pagination } from 'antd';
+
 import { UserInfo } from '@shared/types';
+import { Loader } from '@shared/ui/Loader';
+
+import { getUsers } from '../api';
+import { SearchBar } from '../components/SearchBar';
+import { UserCard } from '../components/UserCard';
 
 export const UsersList = () => {
   const [searchParams, setSearchParams] = useSearchParams();

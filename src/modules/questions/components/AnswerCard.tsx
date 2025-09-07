@@ -1,5 +1,6 @@
+import { CheckCircleTwoTone, UserOutlined } from '@ant-design/icons';
 import { Card, Tag } from 'antd';
-import { UserOutlined, CheckCircleTwoTone } from '@ant-design/icons';
+
 import { Answer } from '../types';
 
 interface AnswerCardProps {

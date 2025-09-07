@@ -1,12 +1,14 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Card, Form, Input, message } from 'antd';
-import { ChangePasswordFormData, changePasswordSchema } from '../helpers/validationChangePasswordSchema';
 import { useMutation } from '@tanstack/react-query';
-import { UpdateUserPassword } from '../types';
+import { Button, Card, Form, Input, message } from 'antd';
 import axios from 'axios';
-import { updatePassword } from '../api';
+
 import { ControlledFormItem } from '@shared/ui/ControlledFormItem';
+
+import { updatePassword } from '../api';
+import { ChangePasswordFormData, changePasswordSchema } from '../helpers/validationChangePasswordSchema';
+import { UpdateUserPassword } from '../types';
 
 export const ChangePasswordForm = () => {
   const {

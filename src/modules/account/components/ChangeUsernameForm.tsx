@@ -1,14 +1,16 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Card, Form, Input, message } from 'antd';
 import { useMutation } from '@tanstack/react-query';
-import { UpdateUserUsername } from '../types';
-import { updateUsername } from '../api';
+import { Button, Card, Form, Input, message } from 'antd';
 import axios from 'axios';
-import { ChangeUsernameFormData, changeUsernameSchema } from '../helpers/validationChangeUsernameSchema';
+
 import { queryClient } from '@app/providers/queryClient';
 import { useAuthStore } from '@shared/store/authStore';
 import { ControlledFormItem } from '@shared/ui/ControlledFormItem';
+
+import { updateUsername } from '../api';
+import { ChangeUsernameFormData, changeUsernameSchema } from '../helpers/validationChangeUsernameSchema';
+import { UpdateUserUsername } from '../types';
 
 export const ChangeUsernameForm = () => {
   const { updateUser } = useAuthStore();

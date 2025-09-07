@@ -1,11 +1,13 @@
-import { Card, Avatar, Tag, Tooltip, Empty } from 'antd';
-import { CodeOutlined, UserOutlined, StarOutlined } from '@ant-design/icons';
 import { useParams } from 'react-router-dom';
-import { getUserStatistic } from '../api';
+import { CodeOutlined, StarOutlined, UserOutlined } from '@ant-design/icons';
 import { useQuery } from '@tanstack/react-query';
+import { Avatar, Card, Empty, Tag, Tooltip } from 'antd';
+
 import { formatNumber } from '@shared/helpers/formatNumber';
-import { Loader } from '@shared/ui/Loader';
 import { useAuthStore } from '@shared/store/authStore';
+import { Loader } from '@shared/ui/Loader';
+
+import { getUserStatistic } from '../api';
 import { UserStatistics } from '../components/UserStatistics';
 
 interface UserCardDetailsProps {

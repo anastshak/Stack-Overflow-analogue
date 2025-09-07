@@ -1,9 +1,11 @@
+import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { message } from 'antd';
+
 import { queryClient } from '@app/providers/queryClient';
+
 import { deleteQuestion, editQuestion } from '../api';
 import { QuestionFormData } from '../helpers/validationQuestionSchema';
-import { useNavigate } from 'react-router-dom';
 
 export const useQuestionActions = (questionId: string, onClose: () => void) => {
   const navigate = useNavigate();

@@ -1,5 +1,5 @@
-import { Layout } from '@shared/layouts/Layout';
 import { QuestionsList } from '@modules/questions';
+import { Layout } from '@shared/layouts/Layout';
 
 const Questions = () => {
   return (

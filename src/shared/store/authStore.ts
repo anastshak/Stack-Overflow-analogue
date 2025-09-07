@@ -1,6 +1,8 @@
 import { create } from 'zustand';
-import { UserInfo } from '../types';
+
 import { queryClient } from '@app/providers/queryClient';
+
+import { UserInfo } from '../types';
 
 interface AuthState {
   user: UserInfo | null;

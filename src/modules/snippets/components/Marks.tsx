@@ -1,10 +1,12 @@
-import { message, Spin } from 'antd';
 import { DislikeOutlined, DislikeTwoTone, LikeOutlined, LikeTwoTone } from '@ant-design/icons';
-import { SnippetModel } from '../types';
-import { useAuthStore } from '@shared/store/authStore';
 import { useMutation } from '@tanstack/react-query';
-import { markPost } from '../api/mark';
+import { message, Spin } from 'antd';
+
 import { queryClient } from '@app/providers/queryClient';
+import { useAuthStore } from '@shared/store/authStore';
+
+import { markPost } from '../api/mark';
+import { SnippetModel } from '../types';
 
 interface MarksSnapProps {
   snippet: SnippetModel;

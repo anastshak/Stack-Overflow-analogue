@@ -1,5 +1,5 @@
-import { Input } from 'antd';
 import type { GetProps } from 'antd';
+import { Input } from 'antd';
 
 export type SearchProps = GetProps<typeof Input.Search>;
 

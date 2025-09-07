@@ -1,5 +1,5 @@
-import { Layout } from '@shared/layouts/Layout';
 import { MySnippetsList } from '@modules/snippets';
+import { Layout } from '@shared/layouts/Layout';
 
 const MySnippets = () => {
   return (

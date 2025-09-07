@@ -1,5 +1,5 @@
-import { Layout } from '@shared/layouts/Layout';
 import { CreateSnippetCard } from '@modules/snippets';
+import { Layout } from '@shared/layouts/Layout';
 
 const PostSnippet = () => {
   return (

@@ -1,10 +1,12 @@
-import { Card, message } from 'antd';
-import { useMutation } from '@tanstack/react-query';
-import { queryClient } from '@app/providers/queryClient';
-import { SnippetFormData } from '../helpers/validationSnippetSchema';
-import { createSnippet } from '../api/snippets';
 import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
+import { Card, message } from 'antd';
+
+import { queryClient } from '@app/providers/queryClient';
+
+import { createSnippet } from '../api/snippets';
 import { PostSnippetForm } from '../components/PostSnippetForm';
+import { SnippetFormData } from '../helpers/validationSnippetSchema';
 
 export const CreateSnippetCard = () => {
   const navigate = useNavigate();

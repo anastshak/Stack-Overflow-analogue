@@ -1,6 +1,7 @@
 import { api } from '@shared/api/api';
-import { ApiModifyQuestion, ApiQuestionsResponse, Question } from '../types';
 import { API_ENDPOINTS } from '@shared/constants/endpoints';
+
+import { ApiModifyQuestion, ApiQuestionsResponse, Question } from '../types';
 
 export const getQuestions = async (
   page: number,

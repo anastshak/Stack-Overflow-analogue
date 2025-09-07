@@ -1,6 +1,7 @@
 import { api } from '@shared/api/api';
-import { ApiUsersResponse, UserWithStatistic } from '../types';
 import { API_ENDPOINTS } from '@shared/constants/endpoints';
+
+import { ApiUsersResponse, UserWithStatistic } from '../types';
 
 export const getUsers = async (
   page: number,

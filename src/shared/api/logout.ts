@@ -1,4 +1,5 @@
 import { API_ENDPOINTS } from '@shared/constants/endpoints';
+
 import { api } from './api';
 
 export const logoutUser = async (): Promise<void> => {

@@ -1,11 +1,13 @@
-import { SnippetCard } from '../components/SnippetCard';
-import { useQuery } from '@tanstack/react-query';
-import { getSnippetsByUserID } from '../api/snippets';
-import { Empty, List } from 'antd';
-import { SnippetModel } from '../types';
 import { useSearchParams } from 'react-router-dom';
-import { Loader } from '@shared/ui/Loader';
+import { useQuery } from '@tanstack/react-query';
+import { Empty, List } from 'antd';
+
 import { useAuthStore } from '@shared/store/authStore';
+import { Loader } from '@shared/ui/Loader';
+
+import { getSnippetsByUserID } from '../api/snippets';
+import { SnippetCard } from '../components/SnippetCard';
+import { SnippetModel } from '../types';
 
 export const MySnippetsList = () => {
   const [searchParams, setSearchParams] = useSearchParams();

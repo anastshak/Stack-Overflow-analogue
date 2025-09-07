@@ -1,10 +1,12 @@
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { getQuestionById } from '../api';
 import { Empty } from 'antd';
-import { QuestionCard } from '../components/QuestionCard';
-import { AnswerCard } from '../components/AnswerCard';
+
 import { Loader } from '@shared/ui/Loader';
+
+import { getQuestionById } from '../api';
+import { AnswerCard } from '../components/AnswerCard';
+import { QuestionCard } from '../components/QuestionCard';
 
 export const QuestionCardDetails = () => {
   const { id } = useParams<{ id: string }>();

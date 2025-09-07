@@ -1,15 +1,17 @@
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Empty } from 'antd';
-import { getSnippetById } from '../api/snippets';
-import { SnippetCard } from '../components/SnippetCard';
-import { CommentCard } from '../components/CommentCard';
-import { CommentForm } from '../components/CommentForm';
-import { CommentInfo } from '../types';
+
+import { socket } from '@shared/api/socket';
 import { useAuthStore } from '@shared/store/authStore';
 import { Loader } from '@shared/ui/Loader';
-import { useEffect, useState } from 'react';
-import { socket } from '@shared/api/socket';
+
+import { getSnippetById } from '../api/snippets';
+import { CommentCard } from '../components/CommentCard';
+import { CommentForm } from '../components/CommentForm';
+import { SnippetCard } from '../components/SnippetCard';
+import { CommentInfo } from '../types';
 
 export const SnippetCardDetails = () => {
   const { isAuthenticated } = useAuthStore();
