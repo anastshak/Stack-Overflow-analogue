@@ -21,7 +21,6 @@ export interface Snippet {
   marks: MarkInfo[];
 }
 
-// necessary custom type
 export interface SnippetModel {
   id: string;
   code: string;

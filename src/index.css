@@ -1,11 +1,9 @@
 @import 'tailwindcss';
 
-/* ---------------- Theme Tokens ---------------- */
 @theme {
   --font-sans: Inter, sans-serif;
 }
 
-/* ---------------- Base Layer ---------------- */
 @layer base {
   html {
     @apply scroll-smooth text-base font-sans not-italic;
@@ -16,9 +14,7 @@
   }
 }
 
-/* ---------------- Components Layer ---------------- */
 @layer components {
-  /* Rewrite Ant Design Menu's default styles*/
   .custom-menu {
     background-color: #1447e6 !important;
   }

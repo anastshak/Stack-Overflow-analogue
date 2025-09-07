@@ -28,7 +28,6 @@ export const Sidebar = () => {
   const location = useLocation();
 
   const [collapsed, setCollapsed] = useState<boolean>(() => {
-    // при первом рендере пробуем взять из localStorage
     const saved = localStorage.getItem('sidebar-collapsed');
     return saved ? JSON.parse(saved) : false;
   });
