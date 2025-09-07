@@ -1,4 +1,4 @@
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate, Link } from 'react-router-dom';
 import { Button, Card, Form, Input, message } from 'antd';
@@ -8,6 +8,7 @@ import axios from 'axios';
 import { useAuthStore } from '@shared/store/authStore';
 import { useMutation } from '@tanstack/react-query';
 import { Loader } from '@shared/ui/Loader';
+import { ControlledFormItem } from '@shared/ui/ControlledFormItem';
 
 export const LoginForm = () => {
   const navigate = useNavigate();
@@ -55,22 +56,22 @@ export const LoginForm = () => {
       <Card title="Login" className="w-full max-w-md shadow-md">
         <Form layout="vertical" onFinish={handleSubmit(onSubmit)}>
           {/* Username */}
-          <Form.Item label="Username" validateStatus={errors.username ? 'error' : ''} help={errors.username?.message}>
-            <Controller
-              name="username"
-              control={control}
-              render={({ field }) => <Input {...field} placeholder="Enter your name" />}
-            />
-          </Form.Item>
+          <ControlledFormItem<LoginFormData>
+            label="Username"
+            error={errors.username}
+            name="username"
+            control={control}
+            render={(field) => <Input {...field} placeholder="Enter your name" />}
+          />
 
           {/* Password */}
-          <Form.Item label="Password" validateStatus={errors.password ? 'error' : ''} help={errors.password?.message}>
-            <Controller
-              name="password"
-              control={control}
-              render={({ field }) => <Input.Password {...field} placeholder="Enter your password" />}
-            />
-          </Form.Item>
+          <ControlledFormItem<LoginFormData>
+            label="Password"
+            error={errors.password}
+            name="password"
+            control={control}
+            render={(field) => <Input.Password {...field} placeholder="Enter your password" />}
+          />
 
           <Button type="primary" htmlType="submit" loading={isSubmitting} block>
             Continue

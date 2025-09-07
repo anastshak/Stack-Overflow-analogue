@@ -1,4 +1,4 @@
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Card, Form, Input, message } from 'antd';
 import { useMutation } from '@tanstack/react-query';
@@ -8,6 +8,7 @@ import axios from 'axios';
 import { ChangeUsernameFormData, changeUsernameSchema } from '../helpers/validationChangeUsernameSchema';
 import { queryClient } from '@app/providers/queryClient';
 import { useAuthStore } from '@shared/store/authStore';
+import { ControlledFormItem } from '@shared/ui/ControlledFormItem';
 
 export const ChangeUsernameForm = () => {
   const { updateUser } = useAuthStore();
@@ -51,17 +52,13 @@ export const ChangeUsernameForm = () => {
     <div className="m-3 max-w-lg flex-1">
       <Card title="Change your username" className="shadow-md">
         <Form layout="vertical" onFinish={handleSubmit(onSubmit)}>
-          <Form.Item
+          <ControlledFormItem<ChangeUsernameFormData>
             label="New username"
-            validateStatus={errors.username ? 'error' : ''}
-            help={errors.username?.message}
-          >
-            <Controller
-              name="username"
-              control={control}
-              render={({ field }) => <Input {...field} placeholder="Enter your new username" />}
-            />
-          </Form.Item>
+            error={errors.username}
+            name="username"
+            control={control}
+            render={(field) => <Input {...field} placeholder="Enter your new username" />}
+          />
 
           <Button type="primary" htmlType="submit" loading={mutation.isPending} block>
             Save changes

@@ -1,4 +1,4 @@
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Card, Form, Input, message } from 'antd';
 import { ChangePasswordFormData, changePasswordSchema } from '../helpers/validationChangePasswordSchema';
@@ -6,6 +6,7 @@ import { useMutation } from '@tanstack/react-query';
 import { UpdateUserPassword } from '../types';
 import axios from 'axios';
 import { updatePassword } from '../api';
+import { ControlledFormItem } from '@shared/ui/ControlledFormItem';
 
 export const ChangePasswordForm = () => {
   const {
@@ -31,10 +32,8 @@ export const ChangePasswordForm = () => {
     onError: (err) => {
       if (axios.isAxiosError(err)) {
         message.error(err.response?.data?.message || 'Changing password error');
-      } else if (err instanceof Error) {
-        message.error(err.message);
       } else {
-        message.error('Failed to update password');
+        message.error(err instanceof Error ? err.message : 'Failed to update password');
       }
     },
   });
@@ -51,43 +50,31 @@ export const ChangePasswordForm = () => {
       <Card title="Change your password" className="shadow-md">
         <Form layout="vertical" onFinish={handleSubmit(onSubmit)}>
           {/* old psw */}
-          <Form.Item
+          <ControlledFormItem<ChangePasswordFormData>
             label="Old password"
-            validateStatus={errors.oldPassword ? 'error' : ''}
-            help={errors.oldPassword?.message}
-          >
-            <Controller
-              name="oldPassword"
-              control={control}
-              render={({ field }) => <Input.Password {...field} placeholder="Enter your old password" />}
-            />
-          </Form.Item>
+            error={errors.oldPassword}
+            name="oldPassword"
+            control={control}
+            render={(field) => <Input.Password {...field} placeholder="Enter your old password" />}
+          />
 
           {/* new psw */}
-          <Form.Item
+          <ControlledFormItem<ChangePasswordFormData>
             label="New password"
-            validateStatus={errors.newPassword ? 'error' : ''}
-            help={errors.newPassword?.message}
-          >
-            <Controller
-              name="newPassword"
-              control={control}
-              render={({ field }) => <Input.Password {...field} placeholder="Create a new password" />}
-            />
-          </Form.Item>
+            error={errors.newPassword}
+            name="newPassword"
+            control={control}
+            render={(field) => <Input.Password {...field} placeholder="Create a new password" />}
+          />
 
           {/* confirm psw */}
-          <Form.Item
-            label="Confirm Password"
-            validateStatus={errors.confirmPassword ? 'error' : ''}
-            help={errors.confirmPassword?.message}
-          >
-            <Controller
-              name="confirmPassword"
-              control={control}
-              render={({ field }) => <Input.Password {...field} placeholder="Repeat your password" />}
-            />
-          </Form.Item>
+          <ControlledFormItem<ChangePasswordFormData>
+            label="Confirm password"
+            error={errors.confirmPassword}
+            name="confirmPassword"
+            control={control}
+            render={(field) => <Input.Password {...field} placeholder="Repeat your password" />}
+          />
 
           <Button type="primary" htmlType="submit" loading={isSubmitting} block>
             Save changes

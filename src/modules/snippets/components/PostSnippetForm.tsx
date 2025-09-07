@@ -1,4 +1,4 @@
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Form, Input, Select } from 'antd';
 import { useQuery } from '@tanstack/react-query';
@@ -6,6 +6,7 @@ import { snippetSchema, SnippetFormData } from '../helpers/validationSnippetSche
 import { getLanguages } from '../api/snippets';
 import { Loader } from '@shared/ui/Loader';
 import { DeleteTwoTone } from '@ant-design/icons';
+import { ControlledFormItem } from '@shared/ui/ControlledFormItem';
 
 interface PostSnippetFormProps {
   mode: 'create' | 'edit';
@@ -45,45 +46,37 @@ export const PostSnippetForm = ({
       ) : (
         <Form layout="vertical" onFinish={handleSubmit(onSubmit)}>
           {/* Language select */}
-          <Form.Item
+          <ControlledFormItem<SnippetFormData>
             label="Language of your snippet"
-            validateStatus={errors.language ? 'error' : ''}
-            help={errors.language?.message}
-          >
-            <Controller
-              name="language"
-              control={control}
-              render={({ field }) => (
-                <Select
-                  {...field}
-                  value={field.value || undefined}
-                  onChange={(value) => field.onChange(value || '')}
-                  placeholder="Choose a programming language..."
-                  options={languages?.map((lang) => ({ value: lang, label: <span>{lang}</span> }))}
-                />
-              )}
-            />
-          </Form.Item>
+            error={errors.language}
+            name="language"
+            control={control}
+            render={(field) => (
+              <Select
+                {...field}
+                value={field.value || undefined}
+                onChange={(value) => field.onChange(value || '')}
+                placeholder="Choose a programming language..."
+                options={languages?.map((lang) => ({ value: lang, label: <span>{lang}</span> }))}
+              />
+            )}
+          />
 
           {/* Code input */}
-          <Form.Item
+          <ControlledFormItem<SnippetFormData>
             label="Code of your snippet"
-            validateStatus={errors.code ? 'error' : ''}
-            help={errors.code?.message}
-          >
-            <Controller
-              name="code"
-              control={control}
-              render={({ field }) => (
-                <Input.TextArea
-                  {...field}
-                  rows={10}
-                  placeholder="Write your code here..."
-                  style={{ fontFamily: 'monospace' }}
-                />
-              )}
-            />
-          </Form.Item>
+            error={errors.code}
+            name="code"
+            control={control}
+            render={(field) => (
+              <Input.TextArea
+                {...field}
+                rows={10}
+                placeholder="Write your code here..."
+                style={{ fontFamily: 'monospace' }}
+              />
+            )}
+          />
 
           <div className="flex gap-1">
             <Button type="primary" htmlType="submit" loading={loading} block>

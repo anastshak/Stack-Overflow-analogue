@@ -1,8 +1,9 @@
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Form, Input } from 'antd';
 import { QuestionFormData, questionSchema } from '../helpers/validationQuestionSchema';
 import { DeleteTwoTone } from '@ant-design/icons';
+import { ControlledFormItem } from '@shared/ui/ControlledFormItem';
 
 interface QuestionFormProps {
   mode: 'create' | 'edit';
@@ -36,37 +37,29 @@ export const QuestionForm = ({
 
   return (
     <Form layout="vertical" onFinish={handleSubmit(onSubmit)}>
-      <Form.Item label="Question title" validateStatus={errors.title ? 'error' : ''} help={errors.title?.message}>
-        <Controller
-          name="title"
-          control={control}
-          render={({ field }) => <Input {...field} placeholder="Question title" />}
-        />
-      </Form.Item>
+      <ControlledFormItem<QuestionFormData>
+        label="Question title"
+        error={errors.title}
+        name="title"
+        control={control}
+        render={(field) => <Input {...field} placeholder="Question title" />}
+      />
 
-      <Form.Item
+      <ControlledFormItem<QuestionFormData>
         label="Question description"
-        validateStatus={errors.description ? 'error' : ''}
-        help={errors.description?.message}
-      >
-        <Controller
-          name="description"
-          control={control}
-          render={({ field }) => <Input.TextArea {...field} rows={3} placeholder="Question description" />}
-        />
-      </Form.Item>
+        error={errors.description}
+        name="description"
+        control={control}
+        render={(field) => <Input.TextArea {...field} rows={3} placeholder="Question description" />}
+      />
 
-      <Form.Item
+      <ControlledFormItem<QuestionFormData>
         label="Attached Code:"
-        validateStatus={errors.attachedCode ? 'error' : ''}
-        help={errors.attachedCode?.message}
-      >
-        <Controller
-          name="attachedCode"
-          control={control}
-          render={({ field }) => <Input.TextArea {...field} rows={6} placeholder="Code snippet" />}
-        />
-      </Form.Item>
+        error={errors.attachedCode}
+        name="attachedCode"
+        control={control}
+        render={(field) => <Input.TextArea {...field} rows={6} placeholder="Code snippet" />}
+      />
 
       <div className="flex gap-1">
         <Button type="primary" htmlType="submit" loading={loading} block>
