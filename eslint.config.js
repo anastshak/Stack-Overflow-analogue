@@ -6,6 +6,7 @@ import reactRefresh from "eslint-plugin-react-refresh";
 import eslintReact from 'eslint-plugin-react';
 import prettierPlugin from 'eslint-plugin-prettier';
 import eslintConfigPrettier from 'eslint-config-prettier';
+import simpleImportSort from 'eslint-plugin-simple-import-sort';
 
 export default tseslint.config({
   extends: [js.configs.recommended, ...tseslint.configs.recommended],
@@ -14,6 +15,9 @@ export default tseslint.config({
     "dist",
     "node_modules",
     "eslint.config.js",
+    "coverage",
+    "__tests__",
+    "**/*.test.*",
     "*.js",
     "*.jsx",
     ".vscode",
@@ -40,6 +44,7 @@ export default tseslint.config({
     'typescript-eslint': tseslint.plugin,
     react: eslintReact,
     prettier: prettierPlugin,
+    "simple-import-sort": simpleImportSort,
   },
   rules: {
     ...prettierPlugin.configs.recommended.rules,
@@ -54,5 +59,14 @@ export default tseslint.config({
     "@typescript-eslint/no-unused-vars": "off",
     "no-console": ["warn", { allow: ["warn", "error"] }],
     "prettier/prettier": ["error", { endOfLine: "auto" }],
+    "simple-import-sort/imports": ["error", {
+      groups: [
+        ["^react", "^@?\\w"],
+        ["^@app", "^@modules", "^@pages", "^@shared", "^@"],
+        ["^\\.\\./?", "^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+        ["^.+\\.s?css$"],
+      ]
+    }],
+    "simple-import-sort/exports": "error",
   },
 });
